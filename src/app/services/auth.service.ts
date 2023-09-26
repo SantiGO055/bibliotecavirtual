@@ -35,14 +35,22 @@ export class AuthService {
     console.log(user)
 
     if (user.email !== '' && user.password !== '') { // {3}
-      this.userData = { email: user.email, emailVerified: true }
-      this.loggedIn.next(true);
-      //TODO implement login in firebase
+
+
+
+      this.afAuth.signInWithEmailAndPassword(user.email, user.password).then((a) => {
+        //TODO implement login in firebase
+        this.loggedIn.next(true);
+        console.log(a)
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        this.router.navigate(['/']);
+      })
+
       console.log(this.userData)
-      localStorage.setItem('user', JSON.stringify(this.userData));
-      this.router.navigate(['/']);
+
     }
   }
+
   // GoogleAuth() {
   //   return this.AuthLogin(new GoogleAuthProvider());
   // }

@@ -36,4 +36,7 @@ export class SignInComponent {
     }
     this.formSubmitAttempt = true;             // {8}
   }
+  loginDirecto() {
+    this.authService.login({ email: 'mrarodrigue@hotmail.com', password: 'maria08' });
+  }
 }

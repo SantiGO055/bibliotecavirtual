@@ -62,7 +62,8 @@ export class FirebaseService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      photoURL: user.photoURL,
+      password: ""
     };
 
     return userRef.set(userData)
