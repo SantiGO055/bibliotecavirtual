@@ -1,0 +1,40 @@
+<div class="box" *ngIf="!this.uploaded && !this.url">
+    <p class="title">
+        Upload your image
+    </p>
+    <p class="subtitle">
+        File should be Jpeg, Png
+    </p>
+    <div class="containerImage" appDnd (fileDropped)="dragDrop($event)">
+        <img src="../../../assets/image.svg">
+        <input class="dropzone" type="file" #fileDropRed id="fileDropRef">
+        <p class="textincontainerimage">
+            Drag & Drop your image here
+        </p>
+    </div>
+    <p class="or">
+        or
+    </p>
+
+    <span class="btn btn-primary btn-file" for="single">
+        Choose a file
+        <input type="file" accept="image/*" (change)="buttonUpload($event)" id="single" [disabled]="uploaded">
+    </span>
+
+</div>
+
+
+<div class="box boxImageUploaded" *ngIf="this.url">
+    <span class="material-symbols-outlined">
+        check_circle
+    </span>
+    <label class="uploadedImage">Uploaded Successfully!</label>
+    <img [src]="this.url">
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control inputUrl" [placeholder]="this.url" aria-label="Url"
+            aria-describedby="button-addon2" disabled>
+        <button class="btn btn-primary" type="button" id="button-addon2" (click)="copyToClipboard()">Copy
+            Link!</button>
+    </div>
+</div>

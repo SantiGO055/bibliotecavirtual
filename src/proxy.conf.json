@@ -1,0 +1,6 @@
+{
+    "/api": {
+        "target": "imageuploaderapp-537b8.appspot.com",
+        "secure": false
+    }
+}
