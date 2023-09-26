@@ -29,28 +29,30 @@ export class AuthService {
       }
     });
   }
+  login(value: string) {
 
-  GoogleAuth() {
-    return this.AuthLogin(new GoogleAuthProvider());
   }
+  // GoogleAuth() {
+  //   return this.AuthLogin(new GoogleAuthProvider());
+  // }
 
-  AuthLogin(provider: firebase.auth.AuthProvider | GoogleAuthProvider) {
-    return this.afAuth
-      .signInWithPopup(provider)
-      .then((result) => {
-        console.log('You have been successfully logged in!');
-        console.log(result.user)
-        this.SetUserData(result.user);
-        this.afAuth.authState.subscribe((user) => {
-          if (user) {
-            this.router.navigate(['main']);
-          }
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  // AuthLogin(provider: firebase.auth.AuthProvider | GoogleAuthProvider) {
+  //   return this.afAuth
+  //     .signInWithPopup(provider)
+  //     .then((result) => {
+  //       console.log('You have been successfully logged in!');
+  //       console.log(result.user)
+  //       this.SetUserData(result.user);
+  //       this.afAuth.authState.subscribe((user) => {
+  //         if (user) {
+  //           this.router.navigate(['main']);
+  //         }
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }
   SignOut() {
     this.afAuth.signOut();
     localStorage.removeItem('user');
@@ -61,7 +63,8 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
+    // return user !== null && user.emailVerified !== false ? true : false; //TODO cambiar cuando se implemente el login
+    return true;
   }
 
   SetUserData(user: any) {
