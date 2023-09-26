@@ -5,7 +5,7 @@
 
 [build]
   base    = "/"
-  publish = "dist/splashimage"
+  publish = "dist/bibliotecavirtual"
   command = "npm run config -- --environment=prod && ng build"
 
 [config]

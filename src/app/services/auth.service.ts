@@ -38,12 +38,14 @@ export class AuthService {
 
 
 
-      this.afAuth.signInWithEmailAndPassword(user.email, user.password).then((a) => {
+      this.afAuth.signInWithEmailAndPassword(user.email, user.password).then((result) => {
         //TODO implement login in firebase
         this.loggedIn.next(true);
-        console.log(a)
+        console.log(result.user)
         localStorage.setItem('user', JSON.stringify(this.userData));
+        this.SetUserData(result.user);
         this.router.navigate(['/']);
+
       })
 
       console.log(this.userData)
