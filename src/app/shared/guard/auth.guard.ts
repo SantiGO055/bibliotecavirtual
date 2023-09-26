@@ -7,6 +7,7 @@ import {
 } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +17,17 @@ export class AuthGuard {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | UrlTree | boolean {
-    if (this.authService.isLoggedIn !== true) {
-      this.router.navigate(['sign-in']);
-    }
-    return true;
+  ): Observable<boolean> {
+    return this.authService.isLoggedIn         // {1}
+      .pipe(
+        take(1),                              // {2} 
+        map((isLoggedIn: boolean) => {         // {3}
+          if (!isLoggedIn) {
+            this.router.navigate(['/sign-in']);  // {4}
+            return false;
+          }
+          return true;
+        })
+      )
   }
 }

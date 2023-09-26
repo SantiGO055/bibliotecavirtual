@@ -5,12 +5,14 @@ import firebase from 'firebase/compat';
 import { Router } from '@angular/router';
 import { User } from '../model/user';
 import { FirebaseService } from './firebase.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   userData: any;
+  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
   constructor(
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -34,7 +36,7 @@ export class AuthService {
 
     if (user.email !== '' && user.password !== '') { // {3}
       this.userData = { email: user.email, emailVerified: true }
-
+      this.loggedIn.next(true);
       //TODO implement login in firebase
       console.log(this.userData)
       localStorage.setItem('user', JSON.stringify(this.userData));
@@ -66,14 +68,19 @@ export class AuthService {
     this.afAuth.signOut();
     localStorage.removeItem('user');
 
+    this.loggedIn.next(false);
+
     console.log(localStorage.getItem('user'))
     this.router.navigate(['sign-in'])
   }
 
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    // return user !== null && user.emailVerified !== false ? true : false; //TODO cambiar cuando se implemente el login
-    return true;
+  // get isLoggedIn(): boolean {
+  //   const user = JSON.parse(localStorage.getItem('user')!);
+  //   // return user !== null && user.emailVerified !== false ? true : false; //TODO cambiar cuando se implemente el login
+  //   return true;
+  // }
+  get isLoggedIn() {
+    return this.loggedIn.asObservable(); // {2}
   }
 
   SetUserData(user: any) {
