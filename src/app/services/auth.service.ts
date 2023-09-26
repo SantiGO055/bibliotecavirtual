@@ -29,8 +29,17 @@ export class AuthService {
       }
     });
   }
-  login(value: string) {
+  login(user: User) {
+    console.log(user)
 
+    if (user.email !== '' && user.password !== '') { // {3}
+      this.userData = { email: user.email, emailVerified: true }
+
+      //TODO implement login in firebase
+      console.log(this.userData)
+      localStorage.setItem('user', JSON.stringify(this.userData));
+      this.router.navigate(['/']);
+    }
   }
   // GoogleAuth() {
   //   return this.AuthLogin(new GoogleAuthProvider());
