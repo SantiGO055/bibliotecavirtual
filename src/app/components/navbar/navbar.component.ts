@@ -8,16 +8,18 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  isLoggedIn$!: Observable<boolean>;                  // {1}
+  isLoggedIn$!: Observable<boolean>;
+  isAnonymous$!: Observable<boolean>;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
+    this.isLoggedIn$ = this.authService.isLoggedIn;
+    this.isAnonymous$ = this.authService.isAnonymous;
   }
 
   onLogout() {
-    this.authService.SignOut();                      // {3}
+    this.authService.SignOut();
   }
 
 }

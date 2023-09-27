@@ -15,9 +15,43 @@
                         Please inform your password
                     </mat-error>
                 </mat-form-field>
-                <button mat-raised-button color="primary">Login</button>
-                <button mat-raised-button (click)="loginDirecto()" color="primary">Login Directo</button>
+
+                <mat-list>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <button mat-raised-button color="primary">Ingresar</button>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <button mat-raised-button (click)="loginDirecto()" color="primary">Ingresar Directo</button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <button mat-raised-button (click)="loginAnonimo()" color="primary">Ingresar como
+                            anonimo</button>
+                    </mat-list-item>
+
+                </mat-list>
+
+
+
             </form>
         </mat-card-content>
+
+        <mat-list *ngIf="isLoading$ | async as isLoggedIn">
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
+
+
+
+
+        <mat-divider></mat-divider>
     </mat-card>
+
+
+
+
 </div>

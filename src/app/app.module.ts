@@ -23,6 +23,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatButtonModule } from '@angular/material/button'
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    MatDividerModule,
+    MatListModule
 
   ],
   providers: [],

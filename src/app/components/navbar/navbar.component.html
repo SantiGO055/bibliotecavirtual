@@ -1,8 +1,7 @@
 <mat-toolbar *ngIf="isLoggedIn$ | async as isLoggedIn" color="primary">
     <span>Biblioteca Virtual</span>
     <div class="spacer"></div>
-    <a mat-button routerLink="/home">Inicio</a>
-    <a mat-button routerLink="/addbook">Agregar libro</a>
-    <a mat-button routerLink="/">Contact</a>
-    <button mat-button (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
+    <a mat-button routerLink="/">Inicio</a>
+    <button *ngIf="!(isAnonymous$ | async) as isAnonymous" mat-button routerLink="/addbook">Agregar libro</button>
+    <button mat-button (click)="onLogout()" *ngIf="isLoggedIn">Salir</button>
 </mat-toolbar>

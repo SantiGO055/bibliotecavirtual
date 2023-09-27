@@ -1,23 +1,23 @@
 <div class="box" *ngIf="!this.uploaded && !this.url">
     <p class="title">
-        Upload your image
+        Subi tu libro
     </p>
     <p class="subtitle">
-        File should be Jpeg, Png
+        El archivo debe ser PDF
     </p>
     <div class="containerImage" appDnd (fileDropped)="dragDrop($event)">
         <img src="../../../assets/image.svg">
         <input class="dropzone" type="file" #fileDropRed id="fileDropRef">
         <p class="textincontainerimage">
-            Drag & Drop your image here
+            Arrastra y solta tu archivo aquí
         </p>
     </div>
     <p class="or">
-        or
+        o
     </p>
 
     <span class="btn btn-primary btn-file" for="single">
-        Choose a file
+        Elegi desde aquí
         <input type="file" accept="image/*" (change)="buttonUpload($event)" id="single" [disabled]="uploaded">
     </span>
 
@@ -28,7 +28,7 @@
     <span class="material-symbols-outlined">
         check_circle
     </span>
-    <label class="uploadedImage">Uploaded Successfully!</label>
+    <label class="uploadedImage">Se subio correctamente!</label>
     <img [src]="this.url">
 
     <div class="input-group mb-3">
