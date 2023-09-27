@@ -26,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
-
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button'
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,9 @@ import { MatListModule } from '@angular/material/list';
     ReactiveFormsModule,
     MatProgressBarModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    CarouselModule,
+    ButtonModule
 
   ],
   providers: [],

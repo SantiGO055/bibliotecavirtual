@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-book',
@@ -44,33 +45,34 @@ export class AddBookComponent {
 
   async uploadFile(files: any) {
 
-    this.uploaded = true
+
     try {
       // console.log(files)
 
       if (!files || files.length === 0) {
-        throw new Error('You must select an image to upload.')
+        throw new Error('Debe seleccionar un archivo PDF para subir.')
       }
+
+
 
       const file = files[0]
       const fileName = files[0].name
       const fileExt = file.name.split('.').pop()
       const filePath = `${Math.random()}.${fileExt}`
 
-
-      this.storage.tareaCloudStorage(fileName, file).then(() => {
-        this.url = this.storage.url;
-      });
-      // this.url = response
-      //this.downloadImage(fileName).then(a => a?.subscribe(response => response != null ? this.url = response : null))
-
-
-
-
+      if (fileExt != "pdf") {
+        Swal.fire("Error", "El archivo debe ser con formato PDF", "error")
+      }
+      else {
+        this.uploaded = true
+        // this.storage.tareaCloudStorage(fileName, file).then(() => {
+        //   this.url = this.storage.url;
+        // });
+      }
 
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message)
+        Swal.fire("", error.message, "warning")
       }
     } finally {
 
