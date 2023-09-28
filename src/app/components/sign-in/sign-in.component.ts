@@ -39,18 +39,7 @@ export class SignInComponent {
     );
   }
 
-  onSubmit() {
-    if (this.form?.valid) {
-      this.authService.login(this.form.value).then((a) => {
-        console.log("qeu devuelve login")
-        console.log(a)
-      });
-    }
-    else {
 
-    }
-    this.formSubmitAttempt = true;             // {8}
-  }
   loginDirecto() {
     this.authService.login(this.usuarioDirecto);
   }

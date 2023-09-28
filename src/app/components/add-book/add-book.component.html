@@ -23,10 +23,16 @@
                 </mat-error>
             </mat-form-field>
 
+            <mat-card class="file">
+                <app-upload-image (newItemEvent)="prepararSubida($event)" [uploaded]="false"
+                    (formEvent)="reciboFormFile($event)" required></app-upload-image>
+                <mat-error *ngIf="isInvalidFile('file')">
+                    Por favor seleccione un archivo para subir
+                </mat-error>
+            </mat-card>
+
+            <button mat-raised-button (click)="cargarLibro()" color="primary">Cargar libro</button>
+
         </form>
     </mat-card-content>
-</mat-card>
-<mat-card class="file">
-    <app-upload-image (newItemEvent)="uploadFile($event)" [uploaded]="false"></app-upload-image>
-
 </mat-card>

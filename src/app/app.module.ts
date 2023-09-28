@@ -29,6 +29,7 @@ import { MatListModule } from '@angular/material/list';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button'
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +62,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     MatListModule,
     CarouselModule,
     ButtonModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    HttpClientModule
 
   ],
   providers: [],

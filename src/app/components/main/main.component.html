@@ -23,7 +23,7 @@
 
 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
     (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
-    <div ngxSlickItem *ngFor="let slide of slides" class="slide">
-        <img src="{{ slide.img }}" alt="" width="70%">
+    <div ngxSlickItem *ngFor="let libro of listadoLibros" class="slide">
+        <img src="{{ libro.urlImagen }}" alt="" width="70%">
     </div>
 </ngx-slick-carousel>

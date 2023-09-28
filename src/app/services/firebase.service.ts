@@ -4,6 +4,10 @@ import { Image } from '../model/image';
 import { Observable, Subject, finalize } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { ApibookService } from './apibook.service';
+import { Libro } from '../model/libro';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +17,8 @@ export class FirebaseService {
   uploadProgress: Observable<number> = new Observable;
   private uploadProgressSubject = new Subject<any>();
   url: string = '';
-  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {
+  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage, private apiBook: ApibookService,
+    private router: Router) {
 
     // var prueba = db.object('a')
     // db.list('a').push({ 'asd': 'asdasdasdadsa' })
@@ -67,5 +72,29 @@ export class FirebaseService {
     };
 
     return userRef.set(userData)
+  }
+  altaLibro(libro: Libro) {
+    this.apiBook.obtenerTapaDelLibro(libro.titulo).subscribe((resultadoLibro: any) => {
+      if (resultadoLibro && resultadoLibro.items && resultadoLibro.items[0].volumeInfo && resultadoLibro.items[0].volumeInfo.imageLinks && resultadoLibro.items[0].volumeInfo.imageLinks.thumbnail) {
+        this.url = resultadoLibro.items[0].volumeInfo.imageLinks.thumbnail
+
+        libro.urlImagen = this.url
+        this.db.object('libros/' + this.db.createPushId()).set(libro).then(() => {
+          Swal.fire("", "Se subio el libro correctamente", "success").then(() => {
+            this.router.navigate(['/']);
+          })
+        })
+      }
+      else {
+        this.db.object('libros/' + this.db.createPushId()).set(libro).then(() => {
+          Swal.fire("", "Se subio el libro correctamente", "success").then(() => {
+            this.router.navigate(['/']);
+          })
+        })
+      }
+    })
+  }
+  getLibros(): Observable<Libro[]> {
+    return this.db.list<Libro>("libros").valueChanges()
   }
 }

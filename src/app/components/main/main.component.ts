@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Libro } from 'src/app/model/libro';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 
@@ -9,6 +10,18 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent {
+
+  listadoLibros!: Libro[];
+  constructor(private firebase: FirebaseService) {
+
+  }
+
+  ngOnInit() {
+    this.firebase.getLibros().subscribe((listadoLibros) => {
+      this.listadoLibros = listadoLibros;
+      console.log(this.listadoLibros)
+    })
+  }
   slides = [
     { img: "https://placehold.jp/150x250.png" },
     { img: "https://placehold.jp/3d4070/ffffff/150x250.png" },

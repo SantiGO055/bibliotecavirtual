@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Libro } from 'src/app/model/libro';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import Swal from 'sweetalert2';
 
@@ -17,7 +18,11 @@ export class AddBookComponent {
   private formSubmitAttempt?: boolean;
   upload: String = ''
   url: string = ''
-  constructor(private readonly storage: FirebaseService, private readonly dom: DomSanitizer, private fb: FormBuilder) { }
+  fileName!: string;
+  file!: any;
+
+  constructor(private readonly storage: FirebaseService, private readonly dom: DomSanitizer, private fb: FormBuilder,
+    private db: FirebaseService) { }
 
   set fileUrl(url: string | null) {
     if (url) {
@@ -30,7 +35,8 @@ export class AddBookComponent {
     this.form = this.fb.group({     // {5}
       titulo: ['', Validators.required],
       autor: ['', Validators.required],
-      editorial: ['', Validators.required]
+      editorial: ['', Validators.required],
+      file: ['', Validators.required]
     });
   }
 
@@ -58,6 +64,12 @@ export class AddBookComponent {
       (this.form.get(field)?.untouched && this.formSubmitAttempt)
     );
   }
+  isInvalidFile(field: string) { // {6}
+
+    return (
+      (!this.form.get(field)?.valid)
+    );
+  }
 
   onSubmit() {
     if (this.form?.valid) {
@@ -69,7 +81,7 @@ export class AddBookComponent {
     this.formSubmitAttempt = true;             // {8}
   }
 
-  async uploadFile(files: any) {
+  prepararSubida(files: any) {
 
 
     try {
@@ -86,24 +98,57 @@ export class AddBookComponent {
       const fileExt = file.name.split('.').pop()
       const filePath = `${Math.random()}.${fileExt}`
 
+      this.fileName = fileName;
+      this.file = file;
+
       if (fileExt != "pdf") {
         Swal.fire("Error", "El archivo debe ser con formato PDF", "error")
-      }
-      else {
-        this.uploaded = true
-        this.storage.tareaCloudStorage(fileName, file).then(() => {
-          this.url = this.storage.url;
-        });
       }
 
     } catch (error) {
       if (error instanceof Error) {
-        Swal.fire("", error.message, "warning")
+        Swal.fire("que", error.message, "warning")
       }
     } finally {
 
 
 
     }
+  }
+
+  async cargarLibro() {
+
+    try {
+
+      let titulo = this.form.get("titulo")?.value
+      let autor = this.form.get("autor")?.value
+      let editorial = this.form.get("editorial")?.value
+
+      let libro: Libro = { titulo, autor, editorial }
+
+      if (this.form?.valid) {
+        this.db.altaLibro(libro)
+      }
+      else {
+
+      }
+      this.formSubmitAttempt = true;
+
+      this.storage.tareaCloudStorage(this.fileName, this.file).then(() => {
+        this.url = this.storage.url;
+      });
+
+
+    } catch (error) {
+
+    }
+
+  }
+  reciboFormFile(event: any) {
+    // console.log(event)
+    this.form.controls['file'].setValue(event)
+    console.log(this.form.get("file"))
+
+
   }
 }

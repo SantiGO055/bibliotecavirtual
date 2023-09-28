@@ -1,4 +1,5 @@
 <div class="box" *ngIf="!this.uploaded">
+
     <p class="title">
         Subi tu libro
     </p>
@@ -15,9 +16,13 @@
     <p class="or">
         o
     </p>
-    <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">Elegi desde aquí</button>
-    <input hidden (change)="buttonUpload($event)" #fileInput type="file" id="file">
+    <form [formGroup]="form">
 
+
+        <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">Elegi desde aquí</button>
+        <input formControlName="file" hidden (change)="buttonUpload($event)" #fileInput type="file" id="file">
+    </form>
+    <span *ngIf="this.fileName">Archivo: {{this.fileName}}</span>
     <!-- <span mat-raised-button color="primary" class="btn btn-primary btn-file" for="single">
         Elegi desde aquí
         <input type="file" accept="image/*" (change)="buttonUpload($event)" id="single" [disabled]="uploaded">
