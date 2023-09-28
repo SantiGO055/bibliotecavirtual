@@ -17,6 +17,7 @@ export class FirebaseService {
   uploadProgress: Observable<number> = new Observable;
   private uploadProgressSubject = new Subject<any>();
   url: string = '';
+  urlImagen: string = '';
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage, private apiBook: ApibookService,
     private router: Router) {
 
@@ -76,9 +77,9 @@ export class FirebaseService {
   altaLibro(libro: Libro) {
     this.apiBook.obtenerTapaDelLibro(libro.titulo).subscribe((resultadoLibro: any) => {
       if (resultadoLibro && resultadoLibro.items && resultadoLibro.items[0].volumeInfo && resultadoLibro.items[0].volumeInfo.imageLinks && resultadoLibro.items[0].volumeInfo.imageLinks.thumbnail) {
-        this.url = resultadoLibro.items[0].volumeInfo.imageLinks.thumbnail
+        this.urlImagen = resultadoLibro.items[0].volumeInfo.imageLinks.thumbnail
 
-        libro.urlImagen = this.url
+        libro.urlImagen = this.urlImagen
         this.db.object('libros/' + this.db.createPushId()).set(libro).then(() => {
           Swal.fire("", "Se subio el libro correctamente", "success").then(() => {
             this.router.navigate(['/']);

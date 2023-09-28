@@ -124,19 +124,24 @@ export class AddBookComponent {
       let autor = this.form.get("autor")?.value
       let editorial = this.form.get("editorial")?.value
 
-      let libro: Libro = { titulo, autor, editorial }
+
 
       if (this.form?.valid) {
-        this.db.altaLibro(libro)
+
+        this.storage.tareaCloudStorage(this.fileName, this.file).then(() => {
+          this.url = this.storage.url;
+
+        }).finally(() => {
+          let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url }
+          this.db.altaLibro(libro)
+        });
+
       }
       else {
 
       }
       this.formSubmitAttempt = true;
 
-      this.storage.tareaCloudStorage(this.fileName, this.file).then(() => {
-        this.url = this.storage.url;
-      });
 
 
     } catch (error) {

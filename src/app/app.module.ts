@@ -30,6 +30,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button'
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HttpClientModule } from '@angular/common/http';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,10 +64,12 @@ import { HttpClientModule } from '@angular/common/http';
     CarouselModule,
     ButtonModule,
     SlickCarouselModule,
-    HttpClientModule
+    HttpClientModule,
+    PdfViewerModule
 
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

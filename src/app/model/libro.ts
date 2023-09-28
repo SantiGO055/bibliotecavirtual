@@ -4,4 +4,5 @@ export interface Libro {
     autor: string;
     editorial: string;
     urlImagen?: string;
+    urlArchivo: string;
 }
