@@ -13,16 +13,12 @@ export class UploadImageComponent {
 
   @Output() newItemEvent = new EventEmitter<any>();
 
-  @Input() url = '';
   @Input() uploaded = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  copyToClipboard() {
-    navigator.clipboard.writeText(this.url)
-  }
   async uploadImage(event: any) {
     // console.log(event)
     this.newItemEvent.emit(event);

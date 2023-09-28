@@ -1,1 +1,32 @@
-<app-upload-image (newItemEvent)="uploadFile($event)" [uploaded]="this.uploaded" [url]="this.url"></app-upload-image>
+<mat-card class="datosLibro">
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <p class="full-width-input">
+                Ingresa los datos del libro
+            </p>
+            <mat-form-field>
+                <input matInput placeholder="Titulo" formControlName="titulo" required>
+                <mat-error *ngIf="isFieldInvalid('titulo')">
+                    Por favor completa el titulo
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Autor" formControlName="autor" required>
+                <mat-error *ngIf="isFieldInvalid('autor')">
+                    Por favor completa el autor
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Editorial" formControlName="editorial" required>
+                <mat-error *ngIf="isFieldInvalid('editorial')">
+                    Por favor completa la editorial
+                </mat-error>
+            </mat-form-field>
+
+        </form>
+    </mat-card-content>
+</mat-card>
+<mat-card class="file">
+    <app-upload-image (newItemEvent)="uploadFile($event)" [uploaded]="false"></app-upload-image>
+
+</mat-card>

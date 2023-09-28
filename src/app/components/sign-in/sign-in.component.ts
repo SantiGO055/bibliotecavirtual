@@ -19,8 +19,8 @@ export class SignInComponent {
 
   private usuarioDirecto: User = { email: "mrarodrigue@hotmail.com", password: "maria08" }
   constructor(
-    private fb: FormBuilder,         // {3}
-    private authService: AuthService // {4}
+    private fb: FormBuilder,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import Swal from 'sweetalert2';
@@ -12,20 +13,28 @@ export class AddBookComponent {
 
   _imageUrl: SafeResourceUrl | undefined
   uploaded = false
-
+  form!: FormGroup;
+  private formSubmitAttempt?: boolean;
   upload: String = ''
   url: string = ''
-  constructor(private readonly storage: FirebaseService, private readonly dom: DomSanitizer) { }
+  constructor(private readonly storage: FirebaseService, private readonly dom: DomSanitizer, private fb: FormBuilder) { }
 
-  set imageUrl(url: string | null) {
+  set fileUrl(url: string | null) {
     if (url) {
       this.downloadFile(url)
     }
   }
 
   ngOnInit(): void {
-    this.uploaded = false
+    this.uploaded = false;
+    this.form = this.fb.group({     // {5}
+      titulo: ['', Validators.required],
+      autor: ['', Validators.required],
+      editorial: ['', Validators.required]
+    });
   }
+
+  // Titulo, autor, editorial
 
   async downloadFile(fileName: string) {
     var retorno
@@ -41,6 +50,23 @@ export class AddBookComponent {
       return retorno
     }
 
+  }
+  isFieldInvalid(field: string) { // {6}
+
+    return (
+      (!this.form.get(field)?.valid && this.form.get(field)?.touched) ||
+      (this.form.get(field)?.untouched && this.formSubmitAttempt)
+    );
+  }
+
+  onSubmit() {
+    if (this.form?.valid) {
+
+    }
+    else {
+
+    }
+    this.formSubmitAttempt = true;             // {8}
   }
 
   async uploadFile(files: any) {
@@ -65,9 +91,9 @@ export class AddBookComponent {
       }
       else {
         this.uploaded = true
-        // this.storage.tareaCloudStorage(fileName, file).then(() => {
-        //   this.url = this.storage.url;
-        // });
+        this.storage.tareaCloudStorage(fileName, file).then(() => {
+          this.url = this.storage.url;
+        });
       }
 
     } catch (error) {

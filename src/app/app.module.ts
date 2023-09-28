@@ -28,6 +28,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button'
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,8 @@ import { ButtonModule } from 'primeng/button'
     MatDividerModule,
     MatListModule,
     CarouselModule,
-    ButtonModule
+    ButtonModule,
+    SlickCarouselModule
 
   ],
   providers: [],

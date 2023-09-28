@@ -1,4 +1,4 @@
-<p-carousel [value]="listImages" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true"
+<!-- <p-carousel [value]="listImages" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true"
     [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
     <ng-template let-image pTemplate="item">
         <div class="product-item">
@@ -10,4 +10,20 @@
             </div>
         </div>
     </ng-template>
-</p-carousel>
+</p-carousel> -->
+<mat-list class="titleLibrosAgregados">
+    <mat-list-item></mat-list-item>
+
+    <mat-list-item>
+        Ultimos libros agregados
+    </mat-list-item>
+
+</mat-list>
+
+
+<ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
+    (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+    <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+        <img src="{{ slide.img }}" alt="" width="70%">
+    </div>
+</ngx-slick-carousel>
