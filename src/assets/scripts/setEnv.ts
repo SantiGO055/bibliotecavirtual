@@ -46,7 +46,9 @@ const environmentFileContent = `
         messagingSenderId: '${process.env.messagingSenderId}',
         appId: '${process.env.appId}',
         measurementId: '${process.env.measurementId}'
-    } 
+    },
+    supabaseUrl: '${process.env.supabaseUrl}',
+    supabaseKey: '${process.env.supabaseKey}'
   };
 `;
 

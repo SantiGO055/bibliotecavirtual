@@ -128,13 +128,19 @@ export class AddBookComponent {
 
       if (this.form?.valid) {
 
-        this.storage.tareaCloudStorage(this.fileName, this.file).then(() => {
-          this.url = this.storage.url;
+        // this.storage.tareaCloudStorage(this.fileName, this.file).then(() => {
 
-        }).finally(() => {
-          let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url }
-          this.db.altaLibro(libro)
-        });
+
+        // })
+        //   .then(() => {
+        this.storage.uploadToSupabase(this.fileName, this.file).then(() => {
+          // this.url = this.storage.downloadImage(this.fileName).data.publicUrl
+        }).catch((e) => console.log(e))
+          // })
+          .finally(() => {
+            let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName }
+            this.db.altaLibro(libro)
+          });
 
       }
       else {

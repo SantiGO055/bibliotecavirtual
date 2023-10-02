@@ -3,4 +3,5 @@ export interface Image {
     label: string;
     url: string;
     password?: string;
+
 }

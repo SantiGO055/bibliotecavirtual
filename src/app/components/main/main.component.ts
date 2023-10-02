@@ -12,7 +12,9 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class MainComponent {
 
   listadoLibros!: Libro[];
-  constructor(private firebase: FirebaseService) {
+  _avatarUrl: SafeResourceUrl | undefined
+
+  constructor(private firebase: FirebaseService, private readonly dom: DomSanitizer) {
 
   }
 
@@ -20,6 +22,9 @@ export class MainComponent {
     this.firebase.getLibros().subscribe((listadoLibros) => {
       this.listadoLibros = listadoLibros;
       console.log(this.listadoLibros)
+
+
+      // this.downloadImage(this.listadoLibros[3].nombreArchivo)
     })
   }
   slides = [
@@ -47,6 +52,20 @@ export class MainComponent {
 
   beforeChange(e: any) {
     console.log('beforeChange');
+  }
+
+  async downloadImage(path: string) {
+    try {
+      const { data } = await this.firebase.downloadImage(path)
+      if (data instanceof Blob) {
+        this._avatarUrl = this.dom.bypassSecurityTrustResourceUrl(URL.createObjectURL(data))
+        console.log(this._avatarUrl)
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error downloading image: ', error.message)
+      }
+    }
   }
 
 
