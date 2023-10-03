@@ -48,6 +48,11 @@ export class FirebaseService {
 
     this.s3 = new S3();
 
+    this.s3.listObjects({ Bucket: 'biblioteca-virtual' }, (err, data) => {
+      console.log(err)
+      console.log(data)
+    })
+
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey, {
       global: {
         headers: {

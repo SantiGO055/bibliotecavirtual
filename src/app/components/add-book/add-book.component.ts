@@ -128,27 +128,24 @@ export class AddBookComponent {
 
       if (this.form?.valid) {
 
-        // this.storage.tareaCloudStorage(this.fileName, this.file).then(() => {
+
+        // this.storage.uploadToAWS(this.fileName, this.file).then((a) => {
+        //   console.log(a)
+        // }).finally(() => {
+        //   let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName }
+        //   this.db.altaLibro(libro)
+        // });
 
 
-        // })
-        //   .then(() => {
-
-        this.storage.uploadToAWS(this.fileName, this.file).then((a) => {
-          console.log(a)
-        }).finally(() => {
-          let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName }
-          this.db.altaLibro(libro)
-        });
-        // this.storage.uploadToSupabase(this.fileName, this.file).then(() => {
-        //   // this.url = 
-        //   this.storage.downloadImage(this.fileName).then(a => console.log(a))
-        // }).catch((e) => console.log(e))
-        //   // })
-        //   .finally(() => {
-        //     let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName }
-        //     this.db.altaLibro(libro)
-        //   });
+        this.storage.uploadToSupabase(this.fileName, this.file).then(() => {
+          // this.url = 
+          this.storage.downloadImage(this.fileName).then(a => console.log(a))
+        }).catch((e) => console.log(e))
+          // })
+          .finally(() => {
+            let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName }
+            this.db.altaLibro(libro)
+          });
 
       }
       else {
