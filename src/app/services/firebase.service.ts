@@ -17,11 +17,16 @@ import {
 } from '@supabase/supabase-js'
 import { environment } from 'src/environments/environment';
 
+import { S3 } from 'aws-sdk';
+import * as AWS from 'aws-sdk';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
+  s3!: S3;
   private supabase!: SupabaseClient
 
   public loading: boolean = false;
@@ -31,6 +36,18 @@ export class FirebaseService {
   urlImagen: string = '';
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage, private apiBook: ApibookService,
     private router: Router) {
+
+
+    AWS.config.update({
+
+      accessKeyId: environment.accessKeyID,
+
+      secretAccessKey: environment.secretAccessKey,
+
+    });
+
+    this.s3 = new S3();
+
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey, {
       global: {
         headers: {
@@ -128,5 +145,23 @@ export class FirebaseService {
   }
   getLibros(): Observable<Libro[]> {
     return this.db.list<Libro>("libros").valueChanges()
+  }
+
+  uploadToAWS(nombreArchivo: string, datos: any) {
+    const params = {
+      Bucket: 'biblioteca-virtual',
+      Key: nombreArchivo,
+      Body: datos
+    };
+
+    return this.s3.upload(params, (err: any, data: { Location: any; }) => {
+      if (err) {
+        console.log('Error uploading file:', err);
+      } else {
+        console.log('File uploaded successfully:', data.Location);
+      }
+    }).promise();
+
+
   }
 }

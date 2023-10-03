@@ -48,7 +48,9 @@ const environmentFileContent = `
         measurementId: '${process.env.measurementId}'
     },
     supabaseUrl: '${process.env.supabaseUrl}',
-    supabaseKey: '${process.env.supabaseKey}'
+    supabaseKey: '${process.env.supabaseKey}',
+    accessKeyID:'${process.env.accessKeyID}',
+    secretAccessKey: '${process.env.secretAccessKey}'
   };
 `;
 

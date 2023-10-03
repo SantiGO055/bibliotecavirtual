@@ -43,12 +43,17 @@ export class UploadImageComponent {
     this.newItemEvent.emit(event);
   }
   dragDrop(event: any) {
-    // console.log(event)
+    console.log(event[0].name)
+    this.form.enable()
+    this.fileName = event[0].name
+    console.log(this.fileName)
     this.uploadImage(event);
+    this.formEvent.emit(this.form.get("file"))
   }
   buttonUpload(event: any) {
     this.form.enable()
     this.fileName = event.target.files[0].name
+    console.log(this.fileName)
     this.uploadImage(event.target.files)
     this.formEvent.emit(this.form.get("file"))
   }
