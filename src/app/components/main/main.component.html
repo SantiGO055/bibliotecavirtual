@@ -25,11 +25,6 @@
     (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
     <div ngxSlickItem *ngFor="let libro of listadoLibros" class="slide">
         <img src="{{ libro.urlImagen }}" alt="" width="70%">
+        <button mat-raised-button color="primary" (click)="verPdf(libro)">Ver PDF</button>
     </div>
 </ngx-slick-carousel>
-
-
-
-
-<pdf-viewer *ngIf="listadoLibros[3]" [src]="listadoLibros[2].urlArchivo" [render-text]="true" [original-size]="false"
-    style="width: 400px; height: 500px"></pdf-viewer>

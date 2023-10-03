@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { Libro } from 'src/app/model/libro';
+import { DataService } from 'src/app/services/data.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 
@@ -13,8 +15,9 @@ export class MainComponent {
 
   listadoLibros!: Libro[];
   _avatarUrl: SafeResourceUrl | undefined
+  libroSeleccionado!: Libro;
 
-  constructor(private firebase: FirebaseService, private readonly dom: DomSanitizer) {
+  constructor(private firebase: FirebaseService, private readonly dom: DomSanitizer, private router: Router, private dataService: DataService) {
 
   }
 
@@ -68,7 +71,14 @@ export class MainComponent {
     }
   }
 
+  verPdf(libro: Libro) {
+    this.libroSeleccionado = libro;
+    this.router.navigate(['/detalle-libro'])
+  }
 
 
+  ngOnDestroy() {
+    this.dataService.libro = this.libroSeleccionado;
+  }
 
 }

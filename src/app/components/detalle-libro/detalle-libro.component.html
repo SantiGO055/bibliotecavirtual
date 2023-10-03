@@ -1,0 +1,4 @@
+<pdf-viewer *ngIf="detalleLibro" [src]="detalleLibro.urlArchivo" [render-text]="true" [original-size]="false"
+    style="width: 400px; height: 500px"></pdf-viewer>
+
+<p>{{detalleLibro.titulo}}</p>

@@ -31,6 +31,7 @@ import { ButtonModule } from 'primeng/button'
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HttpClientModule } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { DetalleLibroComponent } from './components/detalle-libro/detalle-libro.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     DndDirective,
     NavbarComponent,
     AddBookComponent,
-    SignInComponent
+    SignInComponent,
+    DetalleLibroComponent
   ],
   imports: [
     BrowserModule,

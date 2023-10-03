@@ -110,6 +110,7 @@ export class FirebaseService {
         this.urlImagen = resultadoLibro.items[0].volumeInfo.imageLinks.thumbnail
 
         libro.urlImagen = this.urlImagen
+
         this.db.object('libros/' + this.db.createPushId()).set(libro).then(() => {
           Swal.fire("", "Se subio el libro correctamente", "success").then(() => {
             this.router.navigate(['/']);
