@@ -137,8 +137,9 @@ export class AddBookComponent {
         // });
 
 
-        this.storage.uploadToSupabase(this.fileName, this.file).then(() => {
+        this.storage.tareaCloudStorage(this.fileName, this.file).then((url) => {
           // this.url = 
+          console.log(url)
           this.storage.downloadImage(this.fileName).then(a => console.log(a))
         }).catch((e) => console.log(e))
           // })

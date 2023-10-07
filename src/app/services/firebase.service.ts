@@ -17,8 +17,8 @@ import {
 } from '@supabase/supabase-js'
 import { environment } from 'src/environments/environment';
 
-import { S3 } from 'aws-sdk';
-import * as AWS from 'aws-sdk';
+// import { S3 } from 'aws-sdk';
+// import * as AWS from 'aws-sdk';
 
 
 @Injectable({
@@ -26,7 +26,7 @@ import * as AWS from 'aws-sdk';
 })
 export class FirebaseService {
 
-  s3!: S3;
+  // s3!: S3;
   private supabase!: SupabaseClient
 
   public loading: boolean = false;
@@ -38,20 +38,20 @@ export class FirebaseService {
     private router: Router) {
 
 
-    AWS.config.update({
+    // AWS.config.update({
 
-      accessKeyId: environment.accessKeyID,
+    //   accessKeyId: environment.accessKeyID,
 
-      secretAccessKey: environment.secretAccessKey,
+    //   secretAccessKey: environment.secretAccessKey,
 
-    });
+    // });
 
-    this.s3 = new S3();
+    // this.s3 = new S3();
 
-    this.s3.listObjects({ Bucket: 'biblioteca-virtual' }, (err, data) => {
-      console.log(err)
-      console.log(data)
-    })
+    // this.s3.listObjects({ Bucket: 'biblioteca-virtual' }, (err, data) => {
+    //   console.log(err)
+    //   console.log(data)
+    // })
 
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey, {
       global: {
@@ -152,21 +152,21 @@ export class FirebaseService {
     return this.db.list<Libro>("libros").valueChanges()
   }
 
-  uploadToAWS(nombreArchivo: string, datos: any) {
-    const params = {
-      Bucket: 'biblioteca-virtual',
-      Key: nombreArchivo,
-      Body: datos
-    };
+  // uploadToAWS(nombreArchivo: string, datos: any) {
+  //   const params = {
+  //     Bucket: 'biblioteca-virtual',
+  //     Key: nombreArchivo,
+  //     Body: datos
+  //   };
 
-    return this.s3.upload(params, (err: any, data: { Location: any; }) => {
-      if (err) {
-        console.log('Error uploading file:', err);
-      } else {
-        console.log('File uploaded successfully:', data.Location);
-      }
-    }).promise();
+  //   return this.s3.upload(params, (err: any, data: { Location: any; }) => {
+  //     if (err) {
+  //       console.log('Error uploading file:', err);
+  //     } else {
+  //       console.log('File uploaded successfully:', data.Location);
+  //     }
+  //   }).promise();
 
 
-  }
+  // }
 }
