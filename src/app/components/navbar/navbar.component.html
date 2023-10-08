@@ -1,5 +1,6 @@
 <mat-toolbar *ngIf="isLoggedIn$ | async as isLoggedIn" color="primary">
-    <span>Biblioteca Virtual</span>
+    <img class="logo" src="../../../assets/logo.png"/>
+    <span>Biblioteca E. E. N° 2 "Manuel Pardal" - Saladillo</span>
     <div class="spacer"></div>
     <a mat-button routerLink="/">Inicio</a>
     <button *ngIf="!(isAnonymous$ | async) as isAnonymous" mat-button routerLink="/addbook">Agregar libro</button>

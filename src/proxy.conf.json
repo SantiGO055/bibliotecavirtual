@@ -1,6 +1,13 @@
-{
-    "/api": {
-        "target": "bibliotecavirtual-f8e77.appspot.com",
-        "secure": false
+[
+    {
+        "/api": {
+            "target": "bibliotecavirtual-f8e77.appspot.com",
+            "secure": false
+        },
+        "/":{
+            "target": "https://firebasestorage.googleapis.com/v0"
+        }
+
     }
-}
+
+]
