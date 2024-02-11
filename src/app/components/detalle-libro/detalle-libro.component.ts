@@ -11,7 +11,7 @@ export class DetalleLibroComponent {
 
   detalleLibro!: Libro;
   @Input() libro!: Libro;
-
+  
   constructor(private dataService: DataService) {
 
   }

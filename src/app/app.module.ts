@@ -32,7 +32,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HttpClientModule } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { DetalleLibroComponent } from './components/detalle-libro/detalle-libro.component';
-
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -69,7 +69,8 @@ import { DetalleLibroComponent } from './components/detalle-libro/detalle-libro.
     ButtonModule,
     SlickCarouselModule,
     HttpClientModule,
-    PdfViewerModule
+    PdfViewerModule,
+    MatSelectModule,
 
   ],
   providers: [],

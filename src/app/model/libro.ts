@@ -5,5 +5,6 @@ export interface Libro {
     editorial: string;
     urlImagen?: string;
     urlArchivo: string;
-    nombreArchivo: string
+    nombreArchivo: string;
+    categoria: string;
 }

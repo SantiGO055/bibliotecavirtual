@@ -25,6 +25,6 @@
     (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
     <div ngxSlickItem *ngFor="let libro of listadoLibros" class="slide">
         <img src="{{ libro.urlImagen }}" alt="" width="70%">
-        <button mat-raised-button color="primary" (click)="verPdf(libro)">Ver PDF</button>
+        <button mat-raised-button color="primary" (click)="verLibro(libro)">Ver Libro</button>
     </div>
 </ngx-slick-carousel>

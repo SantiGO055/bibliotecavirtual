@@ -20,7 +20,8 @@ export class AddBookComponent {
   url: string = ''
   fileName!: string;
   file!: any;
-
+  agregarCategoriaFL: boolean = false;
+  
   constructor(private readonly storage: FirebaseService, private readonly dom: DomSanitizer, private fb: FormBuilder,
     private db: FirebaseService) { }
 
@@ -29,6 +30,7 @@ export class AddBookComponent {
       this.downloadFile(url)
     }
   }
+  categorias!: String[];
 
   ngOnInit(): void {
     this.uploaded = false;
@@ -36,8 +38,14 @@ export class AddBookComponent {
       titulo: ['', Validators.required],
       autor: ['', Validators.required],
       editorial: ['', Validators.required],
-      file: ['', Validators.required]
+      categoria: ['',Validators.required],
+      file: ['', Validators.required],
+      altaCategoria: ['']
     });
+    this.db.getCategorias().subscribe(cat=> {
+      cat.push("Otra");
+      this.categorias = cat;
+    })
   }
 
   // Titulo, autor, editorial
@@ -71,6 +79,19 @@ export class AddBookComponent {
     );
   }
 
+  mostrarInputAgregarCategoria(){
+    console.log(this.form.get("categoria")?.value)
+    this.agregarCategoriaFL = this.form.get("categoria")?.value == "Otra" ? true : false;
+  }
+  agregarCategoria(){
+    console.log(this.form.get("altaCategoria")?.value)
+    this.db.altaCategoria(this.form.get("altaCategoria")?.value)
+    this.agregarCategoriaFL = false;
+    this.form.get("categoria")?.setValue({categoria: this.form.get("altaCategoria")?.value})
+    
+    //this.form.setValue({categoria : this.form.get("altaCategoria")?.value})
+
+  }
   onSubmit() {
     if (this.form?.valid) {
 
@@ -123,6 +144,7 @@ export class AddBookComponent {
       let titulo = this.form.get("titulo")?.value
       let autor = this.form.get("autor")?.value
       let editorial = this.form.get("editorial")?.value
+      let categoria = this.form.get("categoria")?.value
 
 
 
@@ -144,7 +166,7 @@ export class AddBookComponent {
         }).catch((e) => console.log(e))
           // })
           .finally(() => {
-            let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName }
+            let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName, categoria}
             this.db.altaLibro(libro)
           });
 

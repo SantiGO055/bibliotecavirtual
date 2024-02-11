@@ -71,7 +71,7 @@ export class MainComponent {
     }
   }
 
-  verPdf(libro: Libro) {
+  verLibro(libro: Libro) {
     this.libroSeleccionado = libro;
     this.router.navigate(['/detalle-libro'])
   }

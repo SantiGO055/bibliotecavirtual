@@ -12,10 +12,11 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class AuthService {
-  userData: any;
+  userData!: any;
   private loggedIn = new BehaviorSubject<boolean>(false);
   private loading = new BehaviorSubject<boolean>(false);
   private anonymous = new BehaviorSubject<boolean>(false);
+  
 
   constructor(
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -23,35 +24,41 @@ export class AuthService {
     public ngZone: NgZone,
     private firebase: FirebaseService
   ) {
-    this.afAuth.authState.subscribe((user) => {
+    this.afAuth.onAuthStateChanged((user)=>{
       if (user) {
+        console.log("veo si esta logueado ",user.displayName)
+        
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
+
+
+        this.loggedIn.next(true);
+        this.anonymous.next(false);
+        
+        
+        this.SetUserData(user);
+        this.loading.next(false);
+        this.router.navigate(['/']);
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
+        
+        console.log('User is logged out');
       }
+    })
+    this.afAuth.authState.subscribe((user) => {
+      
     });
   }
-  login(user: User): Promise<void> {
+  login(user: User) {
     this.loading.next(true);
 
     if (user.email !== '' && user.password !== '') {
 
 
 
-      return this.afAuth.signInWithEmailAndPassword(user.email, user.password).then((result) => {
-        //TODO implement login in firebase
-        this.loggedIn.next(true);
-        this.anonymous.next(false);
-        console.log(result);
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        this.SetUserData(result.user);
-        this.loading.next(false);
-        this.router.navigate(['/']);
-
-      }).catch((error) => {
+      return this.afAuth.signInWithEmailAndPassword(user.email, user.password).catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
         Swal.fire(errorCode, errorMessage, "warning")

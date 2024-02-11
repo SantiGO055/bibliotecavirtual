@@ -152,6 +152,20 @@ export class FirebaseService {
     return this.db.list<Libro>("libros").valueChanges()
   }
 
+  altaCategoria(categoria:String){
+    try {
+      this.db.object('categorias/' + this.db.createPushId()).set(categoria).then(() => {
+        
+      })
+    } catch (error) {
+      
+    }
+    
+  }
+  getCategorias() : Observable<String[]>{
+    return this.db.list<String>("categorias").valueChanges();
+  }
+
   // uploadToAWS(nombreArchivo: string, datos: any) {
   //   const params = {
   //     Bucket: 'biblioteca-virtual',

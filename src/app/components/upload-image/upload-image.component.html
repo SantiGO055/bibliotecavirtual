@@ -23,6 +23,7 @@
         <input formControlName="file" hidden (change)="buttonUpload($event)" #fileInput type="file" id="file">
     </form>
     <span *ngIf="this.fileName">Archivo: {{this.fileName}}</span>
+    <mat-error *ngIf="!fileName">Por favor seleccione un archivo para subir</mat-error>
     <!-- <span mat-raised-button color="primary" class="btn btn-primary btn-file" for="single">
         Elegi desde aquí
         <input type="file" accept="image/*" (change)="buttonUpload($event)" id="single" [disabled]="uploaded">

@@ -18,10 +18,12 @@ export class AuthGuard {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
+    
     return this.authService.isLoggedIn         // {1}
       .pipe(
         take(1),                              // {2} 
         map((isLoggedIn: boolean) => {         // {3}
+          console.log(isLoggedIn)
           if (!isLoggedIn) {
             this.router.navigate(['/sign-in']);  // {4}
             return false;

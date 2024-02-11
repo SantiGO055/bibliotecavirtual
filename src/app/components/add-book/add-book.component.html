@@ -1,38 +1,55 @@
-<mat-card class="datosLibro">
-    <mat-card-content>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <p class="full-width-input">
-                Ingresa los datos del libro
-            </p>
-            <mat-form-field>
-                <input matInput placeholder="Titulo" formControlName="titulo" required>
-                <mat-error *ngIf="isFieldInvalid('titulo')">
-                    Por favor completa el titulo
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Autor" formControlName="autor" required>
-                <mat-error *ngIf="isFieldInvalid('autor')">
-                    Por favor completa el autor
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Editorial" formControlName="editorial" required>
-                <mat-error *ngIf="isFieldInvalid('editorial')">
-                    Por favor completa la editorial
-                </mat-error>
-            </mat-form-field>
 
-            <mat-card class="file">
-                <app-upload-image (newItemEvent)="prepararSubida($event)" [uploaded]="false"
-                    (formEvent)="reciboFormFile($event)" required></app-upload-image>
-                <mat-error *ngIf="isInvalidFile('file')">
-                    Por favor seleccione un archivo para subir
-                </mat-error>
-            </mat-card>
+    <mat-card class="datosLibro">
+        <mat-card-content >
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="inputs">
+                    <p class="full-width-input">
+                        Ingresa los datos del libro
+                    </p>
+                    <mat-form-field>
+                        <input matInput placeholder="Titulo" formControlName="titulo" required>
+                        <mat-error *ngIf="isFieldInvalid('titulo')">
+                            Por favor completa el titulo
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Autor" formControlName="autor" required>
+                        <mat-error *ngIf="isFieldInvalid('autor')">
+                            Por favor completa el autor
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Editorial" formControlName="editorial" required>
+                        <mat-error *ngIf="isFieldInvalid('editorial')">
+                            Por favor completa la editorial
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-select placeholder="Categoria" formControlName="categoria" required (selectionChange)="mostrarInputAgregarCategoria()">
+                              <mat-option *ngFor="let cat of categorias" [value]="cat">{{cat}}</mat-option>
+                            
+                          </mat-select>
+                        <mat-error *ngIf="isFieldInvalid('categoria')">
+                            Por favor completa la categoría
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="agregarCategoriaFL">
+                        <input matInput formControlName="altaCategoria" placeholder="Agregar categoria" required>
+                    </mat-form-field>
+                    <button *ngIf="agregarCategoriaFL" mat-stroked-button (click)="agregarCategoria()">Agregar categoria</button>
 
-            <button mat-raised-button (click)="cargarLibro()" color="primary">Cargar libro</button>
+                    <button mat-raised-button (click)="cargarLibro()" class="buttonUpload" color="primary">Cargar libro</button>
+                </div>
+                
+    
+                <mat-card class="file">
+                    <app-upload-image (newItemEvent)="prepararSubida($event)" [uploaded]="false"
+                        (formEvent)="reciboFormFile($event)" required></app-upload-image>
+                </mat-card>
+    
+                
+    
+            </form>
+        </mat-card-content>
+    </mat-card>
 
-        </form>
-    </mat-card-content>
-</mat-card>
