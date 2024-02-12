@@ -5,7 +5,7 @@ import { Observable, Subject, finalize } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { ApibookService } from './apibook.service';
-import { Libro } from '../model/libro';
+import { Libro, Libros } from '../model/libro';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import {
@@ -126,13 +126,13 @@ export class FirebaseService {
 
     return userRef.set(userData)
   }
-  altaLibro(libro: Libro) {
-    this.apiBook.obtenerTapaDelLibro(libro.titulo).subscribe((resultadoLibro: any) => {
+  altaLibro(libro: Libros) {
+    this.apiBook.obtenerTapaDelLibro(libro.libro.titulo).subscribe((resultadoLibro: any) => {
       if (resultadoLibro && resultadoLibro.items && resultadoLibro.items[0].volumeInfo && resultadoLibro.items[0].volumeInfo.imageLinks && resultadoLibro.items[0].volumeInfo.imageLinks.thumbnail) {
         this.urlImagen = resultadoLibro.items[0].volumeInfo.imageLinks.thumbnail
 
-        libro.urlImagen = this.urlImagen
-
+        libro.libro.urlImagen = this.urlImagen
+        
         this.db.object('libros/' + this.db.createPushId()).set(libro).then(() => {
           Swal.fire("", "Se subio el libro correctamente", "success").then(() => {
             this.router.navigate(['/']);
@@ -148,9 +148,10 @@ export class FirebaseService {
       }
     })
   }
-  getLibros(): Observable<Libro[]> {
-    return this.db.list<Libro>("libros").valueChanges()
+  getLibros(): Observable<Libros[]> {
+    return this.db.list<Libros>("libros").valueChanges()
   }
+  
 
   altaCategoria(categoria:String){
     try {

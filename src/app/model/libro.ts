@@ -8,3 +8,8 @@ export interface Libro {
     nombreArchivo: string;
     categoria: string;
 }
+
+export interface Libros{
+    categoria: string;
+    libro: Libro;
+}

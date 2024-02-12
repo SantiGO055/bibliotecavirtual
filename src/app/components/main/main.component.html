@@ -12,19 +12,39 @@
     </ng-template>
 </p-carousel> -->
 <mat-list class="titleLibrosAgregados">
-    <mat-list-item></mat-list-item>
+    <div *ngFor="let categoria of listadoCategorias">
+        
+        <div *ngFor="let libro of listadoLibros">
+            
+            <div *ngIf="libro.libro.categoria == categoria">
+                <h3>{{categoria}}</h3>
+            
+                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
+                    (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+                    <div ngxSlickItem>
+                        <img src="{{ libro.libro.urlImagen }}" alt="" width="70%">
+                        <button mat-raised-button color="primary" (click)="verLibro(libro.libro)">Ver Libro</button>
+                    </div>
+                </ngx-slick-carousel>
+            </div>
+                
+        </div>
+        
+    </div>
+    
 
     <mat-list-item>
         Ultimos libros agregados
     </mat-list-item>
-
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
+        (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+        <div ngxSlickItem *ngFor="let libro of listadoLibros" class="slide">
+            <img src="{{ libro.libro.urlImagen }}" alt="" width="70%">
+            <button mat-raised-button color="primary" (click)="verLibro(libro.libro)">Ver Libro</button>
+        </div>
+    </ngx-slick-carousel>
 </mat-list>
 
 
-<ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
-    (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
-    <div ngxSlickItem *ngFor="let libro of listadoLibros" class="slide">
-        <img src="{{ libro.urlImagen }}" alt="" width="70%">
-        <button mat-raised-button color="primary" (click)="verLibro(libro)">Ver Libro</button>
-    </div>
-</ngx-slick-carousel>
+
+

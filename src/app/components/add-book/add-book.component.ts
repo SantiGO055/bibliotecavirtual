@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Libro } from 'src/app/model/libro';
+import { Libro, Libros } from 'src/app/model/libro';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import Swal from 'sweetalert2';
 
@@ -123,6 +123,8 @@ export class AddBookComponent {
       this.file = file;
 
       if (fileExt != "pdf") {
+        this.fileName = "";
+        this.file = undefined;
         Swal.fire("Error", "El archivo debe ser con formato PDF", "error")
       }
 
@@ -159,16 +161,19 @@ export class AddBookComponent {
         // });
 
 
-        this.storage.tareaCloudStorage(this.fileName, this.file).then((url) => {
-          // this.url = 
-          this.url = this.storage.url;
-          //this.storage.downloadImage(this.fileName).then(a => console.log(a))
-        }).catch((e) => console.log(e))
-          // })
-          .finally(() => {
-            let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName, categoria}
-            this.db.altaLibro(libro)
-          });
+        if(this.fileName){
+          if(this.file){
+            this.storage.tareaCloudStorage(this.fileName, this.file).then((url) => {
+              this.url = this.storage.url;
+            }).catch((e) => console.log(e))
+            .finally(() => {
+              let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName, categoria}
+              let libroAlta: Libros = {categoria, libro}
+              this.db.altaLibro(libroAlta)
+            });
+          }
+
+        }
 
       }
       else {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Libro } from 'src/app/model/libro';
+import { Libro, Libros } from 'src/app/model/libro';
 import { DataService } from 'src/app/services/data.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -13,7 +13,8 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class MainComponent {
 
-  listadoLibros!: Libro[];
+  listadoLibros!: Libros[];
+  listadoCategorias!: String[];
   _avatarUrl: SafeResourceUrl | undefined
   libroSeleccionado!: Libro;
 
@@ -26,19 +27,14 @@ export class MainComponent {
       this.listadoLibros = listadoLibros;
       console.log(this.listadoLibros)
 
-
-      // this.downloadImage(this.listadoLibros[3].nombreArchivo)
     })
+    this.firebase.getCategorias().subscribe((listadoCategorias) => {
+      this.listadoCategorias = listadoCategorias;
+      console.log(this.listadoCategorias)
+    })
+    
   }
-  slides = [
-    { img: "https://placehold.jp/150x250.png" },
-    { img: "https://placehold.jp/3d4070/ffffff/150x250.png" },
-    { img: "https://placehold.jp/150x250.png" },
-    { img: "https://placehold.jp/3d4070/ffffff/150x250.png" },
-    { img: "https://placehold.jp/150x250.png" },
-    { img: "https://placehold.jp/3d4070/ffffff/150x250.png" },
-
-  ];
+  
   slideConfig = { "slidesToShow": 4, "slidesToScroll": 1 };
 
   slickInit(e: any) {
