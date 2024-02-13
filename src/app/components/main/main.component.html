@@ -14,13 +14,11 @@
 
 
 <mat-list class="titleLibrosAgregados">
-    <!-- <div *ngFor="let categoria of listadoCategorias">
-        
+    <div *ngFor="let categoria of listadoCategorias">
+        <h3>{{categoria}}</h3>
         <div *ngFor="let libro of listadoLibros">
             
             <div *ngIf="libro.libro.categoria == categoria">
-                <h3>{{categoria}}</h3>
-            
                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
                     (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
                     <div ngxSlickItem>
@@ -32,7 +30,7 @@
                 
         </div>
         
-    </div> -->
+    </div> 
     
 
     <mat-list-item>

@@ -17,6 +17,7 @@ export class MainComponent {
   listadoLibros!: Libros[];
   listadoCategorias!: String[];
   libroSeleccionado!: Libro;
+  librosPorCategoria!: Libros[];
 
   constructor(private firebase: FirebaseService, private readonly dom: DomSanitizer,
      private router: Router, private dataService: DataService, private spinner: SpinnerService) {
@@ -27,15 +28,44 @@ export class MainComponent {
     this.firebase.getLibros().subscribe((listadoLibros) => {
       this.listadoLibros = listadoLibros;
       console.log(this.listadoLibros)
-
     })
     this.firebase.getCategorias().subscribe((listadoCategorias) => {
       this.listadoCategorias = listadoCategorias;
-      console.log(this.listadoCategorias)
+      
+      
+      this.agruparCategorias()
+      
     })
+
+    
+    
     
   }
   
+
+  agruparCategorias(){
+    // let data: Libros[][]= [];
+    // this.listadoCategorias.forEach((cat)=>{
+    //   console.log(this.listadoLibros.filter(lib => lib.categoria == cat).filter((el)=> el != undefined))
+    //   data.push(this.listadoLibros.filter(lib => lib.categoria == cat))
+      
+    // })
+
+    // data.forEach((el)=>{
+    //   if(el.length > 0){
+    //     console.log(el)
+    //     el.forEach((lib)=>{
+    //       this.librosPorCategoria.push(lib)
+    //       console.log(this.librosPorCategoria)
+
+    //     })
+
+    //   }
+    // })
+
+    
+  }
+
   slideConfig = { "slidesToShow": 4, "slidesToScroll": 1 };
 
   slickInit(e: any) {
