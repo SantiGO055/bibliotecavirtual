@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Libro, Libros } from 'src/app/model/libro';
 import { DataService } from 'src/app/services/data.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 
 @Component({
@@ -15,10 +16,10 @@ export class MainComponent {
 
   listadoLibros!: Libros[];
   listadoCategorias!: String[];
-  _avatarUrl: SafeResourceUrl | undefined
   libroSeleccionado!: Libro;
 
-  constructor(private firebase: FirebaseService, private readonly dom: DomSanitizer, private router: Router, private dataService: DataService) {
+  constructor(private firebase: FirebaseService, private readonly dom: DomSanitizer,
+     private router: Router, private dataService: DataService, private spinner: SpinnerService) {
 
   }
 
@@ -53,28 +54,33 @@ export class MainComponent {
     console.log('beforeChange');
   }
 
-  async downloadImage(path: string) {
-    try {
-      const { data } = await this.firebase.downloadImage(path)
-      if (data instanceof Blob) {
-        this._avatarUrl = this.dom.bypassSecurityTrustResourceUrl(URL.createObjectURL(data))
-        console.log(this._avatarUrl)
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error('Error downloading image: ', error.message)
-      }
-    }
-  }
+  // async downloadImage(path: string) {
+  //   try {
+  //     const { data } = await this.firebase.downloadImage(path)
+  //     if (data instanceof Blob) {
+  //       this._avatarUrl = this.dom.bypassSecurityTrustResourceUrl(URL.createObjectURL(data))
+  //       console.log(this._avatarUrl)
+  //     }
+  //   } catch (error) {
+  //     if (error instanceof Error) {
+  //       console.error('Error downloading image: ', error.message)
+  //     }
+  //   }
+  // }
 
   verLibro(libro: Libro) {
+    this.spinner.showSpinner();
     this.libroSeleccionado = libro;
     this.router.navigate(['/detalle-libro'])
+    setTimeout(() => {
+      this.spinner.hideSpinner();
+    }, 1000);
   }
 
 
   ngOnDestroy() {
     this.dataService.libro = this.libroSeleccionado;
+    
   }
 
 }

@@ -30,6 +30,7 @@
     "ng2-pdf-viewer": "^10.0.0",
     "ngx-extended-pdf-viewer": "^18.1.4",
     "ngx-slick-carousel": "^15.0.0",
+    "ngx-spinner": "^16.0.2",
     "primeicons": "^6.0.1",
     "primeng": "^16.4.1",
     "rxjs": "~7.8.0",

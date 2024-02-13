@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Libro, Libros } from 'src/app/model/libro';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import Swal from 'sweetalert2';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-add-book',
@@ -23,7 +24,7 @@ export class AddBookComponent {
   agregarCategoriaFL: boolean = false;
   
   constructor(private readonly storage: FirebaseService, private readonly dom: DomSanitizer, private fb: FormBuilder,
-    private db: FirebaseService) { }
+    private db: FirebaseService, private spinner: SpinnerService) { }
 
   set fileUrl(url: string | null) {
     if (url) {
@@ -43,7 +44,7 @@ export class AddBookComponent {
       altaCategoria: ['']
     });
     this.db.getCategorias().subscribe(cat=> {
-      cat.push("Otra");
+      cat.push("Agregar categoria");
       this.categorias = cat;
     })
   }
@@ -81,7 +82,7 @@ export class AddBookComponent {
 
   mostrarInputAgregarCategoria(){
     console.log(this.form.get("categoria")?.value)
-    this.agregarCategoriaFL = this.form.get("categoria")?.value == "Otra" ? true : false;
+    this.agregarCategoriaFL = this.form.get("categoria")?.value == "Agregar categoria" ? true : false;
   }
   agregarCategoria(){
     console.log(this.form.get("altaCategoria")?.value)
@@ -151,6 +152,7 @@ export class AddBookComponent {
 
 
       if (this.form?.valid) {
+        
 
 
         // this.storage.uploadToAWS(this.fileName, this.file).then((a) => {
@@ -160,7 +162,7 @@ export class AddBookComponent {
         //   this.db.altaLibro(libro)
         // });
 
-
+        this.spinner.showSpinner();
         if(this.fileName){
           if(this.file){
             this.storage.tareaCloudStorage(this.fileName, this.file).then((url) => {
@@ -169,7 +171,9 @@ export class AddBookComponent {
             .finally(() => {
               let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName, categoria}
               let libroAlta: Libros = {categoria, libro}
+              console.log(libroAlta)
               this.db.altaLibro(libroAlta)
+              
             });
           }
 

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Libro } from 'src/app/model/libro';
 import { DataService } from 'src/app/services/data.service';
 
+
 @Component({
   selector: 'app-detalle-libro',
   templateUrl: './detalle-libro.component.html',
@@ -13,12 +14,15 @@ export class DetalleLibroComponent {
   @Input() libro!: Libro;
   
   constructor(private dataService: DataService) {
-
+    
+  
   }
 
   ngOnInit() {
-    this.detalleLibro = this.dataService.libro
+    this.detalleLibro = this.dataService.libro;
+    
     console.log(this.detalleLibro)
+    
   }
 
 }

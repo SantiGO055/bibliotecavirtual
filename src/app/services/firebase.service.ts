@@ -16,6 +16,7 @@ import {
   SupabaseClient,
 } from '@supabase/supabase-js'
 import { environment } from 'src/environments/environment';
+import { SpinnerService } from './spinner.service';
 
 // import { S3 } from 'aws-sdk';
 // import * as AWS from 'aws-sdk';
@@ -35,7 +36,7 @@ export class FirebaseService {
   url: string = '';
   urlImagen: string = '';
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage, private apiBook: ApibookService,
-    private router: Router) {
+    private router: Router, private spinner: SpinnerService) {
 
 
     // AWS.config.update({
@@ -127,6 +128,7 @@ export class FirebaseService {
     return userRef.set(userData)
   }
   altaLibro(libro: Libros) {
+    
     this.apiBook.obtenerTapaDelLibro(libro.libro.titulo).subscribe((resultadoLibro: any) => {
       if (resultadoLibro && resultadoLibro.items && resultadoLibro.items[0].volumeInfo && resultadoLibro.items[0].volumeInfo.imageLinks && resultadoLibro.items[0].volumeInfo.imageLinks.thumbnail) {
         this.urlImagen = resultadoLibro.items[0].volumeInfo.imageLinks.thumbnail
@@ -134,6 +136,7 @@ export class FirebaseService {
         libro.libro.urlImagen = this.urlImagen
         
         this.db.object('libros/' + this.db.createPushId()).set(libro).then(() => {
+          this.spinner.hideSpinner();
           Swal.fire("", "Se subio el libro correctamente", "success").then(() => {
             this.router.navigate(['/']);
           })
@@ -141,7 +144,9 @@ export class FirebaseService {
       }
       else {
         this.db.object('libros/' + this.db.createPushId()).set(libro).then(() => {
+          this.spinner.hideSpinner();
           Swal.fire("", "Se subio el libro correctamente", "success").then(() => {
+            
             this.router.navigate(['/']);
           })
         })

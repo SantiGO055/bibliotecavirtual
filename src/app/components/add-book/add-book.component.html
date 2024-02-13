@@ -34,11 +34,11 @@
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field *ngIf="agregarCategoriaFL">
-                        <input matInput formControlName="altaCategoria" placeholder="Agregar categoria" required>
+                        <input matInput formControlName="altaCategoria" placeholder="Nueva categoria" required>
                     </mat-form-field>
                     <button *ngIf="agregarCategoriaFL" mat-stroked-button (click)="agregarCategoria()">Agregar categoria</button>
 
-                    <button mat-raised-button (click)="cargarLibro()" class="buttonUpload" color="primary">Cargar libro</button>
+                    <button *ngIf="form.valid" mat-raised-button (click)="cargarLibro()" class="buttonUpload" color="primary">Cargar libro</button>
                 </div>
                 
     

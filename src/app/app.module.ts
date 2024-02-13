@@ -33,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { DetalleLibroComponent } from './components/detalle-libro/detalle-libro.component';
 import { MatSelectModule } from '@angular/material/select';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +71,7 @@ import { MatSelectModule } from '@angular/material/select';
     HttpClientModule,
     PdfViewerModule,
     MatSelectModule,
-
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
