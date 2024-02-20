@@ -13,3 +13,8 @@ export interface Libros{
     categoria: string;
     libro: Libro;
 }
+
+export interface LibrosCategoria{
+    categoria: string;
+    libro: Libro[];
+}

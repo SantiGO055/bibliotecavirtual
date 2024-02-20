@@ -1,50 +1,57 @@
-<!-- <p-carousel [value]="listImages" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1" [circular]="true"
-    [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
-    <ng-template let-image pTemplate="item">
-        <div class="product-item">
-            <div class="product-item-content">
+<div class="carousel">
+
+    <p-carousel [value]="listadoLibros" [numVisible]="4" [numScroll]="1" [circular]="false" >
+        <ng-template pTemplate="header">
+            <p>Ultimos libros agregados</p>
+        </ng-template>
+        <ng-template let-libro pTemplate="item">
+            <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
                 <div class="mb-3">
-                    <img [src]="image.img" [alt]="listImages" class="product-image" />
+                    <img src="{{libro.libro.urlImagen}}" [alt]="libro.titulo" class="w-6 shadow-2" />
                 </div>
-
-            </div>
-        </div>
-    </ng-template>
-</p-carousel> -->
-
-
-<mat-list class="titleLibrosAgregados">
-    <div *ngFor="let categoria of listadoCategorias">
-        <h3>{{categoria}}</h3>
-        <div *ngFor="let libro of listadoLibros">
-            
-            <div *ngIf="libro.libro.categoria == categoria">
-                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
-                    (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
-                    <div ngxSlickItem>
-                        <img src="{{ libro.libro.urlImagen }}" alt="" width="70%">
-                        <button mat-raised-button color="primary" (click)="verLibro(libro.libro)">Ver Libro</button>
+                <div>
+                    <h4 class="mb-1">{{ libro.libro.titulo }}</h4>
+                    <h5 class="mt-0 mb-3">{{ '' + libro.libro.autor }}</h5>
+                    <!-- <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(libro.inventoryStatus)"></p-tag> -->
+                    <div class="mt-5 flex align-items-center justify-content-center gap-2">
+                        <p-button [rounded]="true" (click)="verLibro(libro.libro)" label="Ver libro"/>
+                        <p-button icon="pi pi-star-fill" [rounded]="true" severity="secondary" />
                     </div>
-                </ngx-slick-carousel>
+                </div>
             </div>
-                
-        </div>
-        
-    </div> 
+        </ng-template>
+    </p-carousel>
+
+
+    <div *ngFor="let libros of listadoLibrosPorCategoria">
     
-
-    <mat-list-item>
-        Ultimos libros agregados
-    </mat-list-item>
-    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
-        (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
-        <div ngxSlickItem *ngFor="let libro of listadoLibros" class="slide">
-            <img src="{{ libro.libro.urlImagen }}" alt="" width="70%">
-            <button mat-raised-button color="primary" (click)="verLibro(libro.libro)">Ver Libro</button>
-        </div>
-    </ngx-slick-carousel>
-</mat-list>
-
-
-
-
+        <!-- <div *ngFor="let lib of libros.libro "> -->
+            
+                <p-carousel [value]="libros.libro | keyvalue" [numVisible]="4" [numScroll]="1" [circular]="false" >
+                    <ng-template pTemplate="header">
+                        <p>{{libros.categoria}}</p>
+                    </ng-template>
+                    
+                    <ng-template let-lib pTemplate="item">
+                        <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+                            <div class="mb-3">
+                                <img src="{{lib.value.urlImagen}}" [alt]="lib.value.titulo" class="w-6 shadow-2" />
+                            </div>
+                            <div>
+                                <h4 class="mb-1">{{ lib.value.titulo }}</h4>
+                                <h5 class="mt-0 mb-3">{{ '' + lib.value.autor }}</h5>
+                                <div class="mt-5 flex align-items-center justify-content-center gap-2">
+                                    <p-button [rounded]="true" (click)="verLibro(lib.value)" label="Ver libro"/>
+                                    <p-button icon="pi pi-star-fill" [rounded]="true" severity="secondary" />
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-carousel>
+            
+        <!-- </div> -->
+        
+    </div>
+    
+    
+</div>

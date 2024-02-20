@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Libro, Libros } from 'src/app/model/libro';
+import { Libro, Libros, LibrosCategoria } from 'src/app/model/libro';
 import { DataService } from 'src/app/services/data.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -17,7 +17,7 @@ export class MainComponent {
   listadoLibros!: Libros[];
   listadoCategorias!: String[];
   libroSeleccionado!: Libro;
-  librosPorCategoria!: Libros[];
+  listadoLibrosPorCategoria: LibrosCategoria[] = [];
 
   constructor(private firebase: FirebaseService, private readonly dom: DomSanitizer,
      private router: Router, private dataService: DataService, private spinner: SpinnerService) {
@@ -32,40 +32,27 @@ export class MainComponent {
     this.firebase.getCategorias().subscribe((listadoCategorias) => {
       this.listadoCategorias = listadoCategorias;
       
-      
-      this.agruparCategorias()
-      
     })
+    
+    this.firebase.getCategoriasLibros() .subscribe((a) => {
+     
+      
+      let libroArray = a.payload.val() as unknown as Libro[];
+      
+      this.listadoLibrosPorCategoria.push({categoria: a.key as string,libro: libroArray})
 
+        // libros.push({categoria: a.key,libro: a.payload})
+  
+      }
+      ); //this.db.list<Libros>("categorias-libros").valueChanges();
+      
+    
+    console.log(this.listadoLibrosPorCategoria)
     
     
     
   }
   
-
-  agruparCategorias(){
-    // let data: Libros[][]= [];
-    // this.listadoCategorias.forEach((cat)=>{
-    //   console.log(this.listadoLibros.filter(lib => lib.categoria == cat).filter((el)=> el != undefined))
-    //   data.push(this.listadoLibros.filter(lib => lib.categoria == cat))
-      
-    // })
-
-    // data.forEach((el)=>{
-    //   if(el.length > 0){
-    //     console.log(el)
-    //     el.forEach((lib)=>{
-    //       this.librosPorCategoria.push(lib)
-    //       console.log(this.librosPorCategoria)
-
-    //     })
-
-    //   }
-    // })
-
-    
-  }
-
   slideConfig = { "slidesToShow": 4, "slidesToScroll": 1 };
 
   slickInit(e: any) {

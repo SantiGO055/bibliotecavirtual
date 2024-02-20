@@ -34,6 +34,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { DetalleLibroComponent } from './components/detalle-libro/detalle-libro.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxSpinnerModule } from 'ngx-spinner';
+
+
 @NgModule({
   declarations: [
     AppComponent,

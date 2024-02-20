@@ -3,9 +3,9 @@ import { User } from '../model/user';
 import { Image } from '../model/image';
 import { Observable, Subject, finalize } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFireDatabase, SnapshotAction } from '@angular/fire/compat/database';
 import { ApibookService } from './apibook.service';
-import { Libro, Libros } from '../model/libro';
+import { Libro, Libros, LibrosCategoria } from '../model/libro';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import {
@@ -135,6 +135,8 @@ export class FirebaseService {
 
         libro.libro.urlImagen = this.urlImagen
         
+
+        this.altaCategoriasLibros(libro);
         this.db.object('libros/' + this.db.createPushId()).set(libro).then(() => {
           this.spinner.hideSpinner();
           Swal.fire("", "Se subio el libro correctamente", "success").then(() => {
@@ -170,6 +172,29 @@ export class FirebaseService {
   }
   getCategorias() : Observable<String[]>{
     return this.db.list<String>("categorias").valueChanges();
+  }
+
+  altaCategoriasLibros(libro:Libros){
+    try {
+      this.db.object('categorias-libros/' + libro.categoria +"/"+ this.db.createPushId()).set(libro.libro).then(() => {
+        
+      })
+    } catch (error) {
+      
+    }
+    
+  }
+  getCategoriasLibros() : Observable<SnapshotAction<LibrosCategoria[]>>{
+  
+    return this.db.list<LibrosCategoria[]>('categorias-libros').stateChanges();
+    // .subscribe((a) => {
+    //   libros.push({categoria: a.key as string,libro: a.payload.val() as any})
+    //   console.log(libros)
+    //   // libros.push({categoria: a.key,libro: a.payload})
+
+    // }
+    // ); //this.db.list<Libros>("categorias-libros").valueChanges();
+    
   }
 
   // uploadToAWS(nombreArchivo: string, datos: any) {
