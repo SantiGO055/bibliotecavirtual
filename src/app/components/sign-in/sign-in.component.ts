@@ -15,7 +15,7 @@ export class SignInComponent {
   private formSubmitAttempt?: boolean; // {2}
 
   isLoading$!: Observable<boolean>;
-
+  email!: string;
 
   private usuarioDirecto: User = { email: "mrarodrigue@hotmail.com", password: "maria08" }
   constructor(

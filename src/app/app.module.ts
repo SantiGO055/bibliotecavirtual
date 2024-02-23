@@ -34,7 +34,10 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { DetalleLibroComponent } from './components/detalle-libro/detalle-libro.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { CardModule } from 'primeng/card';
+import { DividerModule } from 'primeng/divider';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
   declarations: [
@@ -73,7 +76,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     PdfViewerModule,
     MatSelectModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    InputTextModule,
+    CardModule,
+    DividerModule,
+    ProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

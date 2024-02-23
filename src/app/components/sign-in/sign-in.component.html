@@ -1,4 +1,29 @@
 <div class="signin-content">
+    <div class="containerLogin">
+        <p-card header="Iniciar sesión" subheader="Ingrese email y contraseña" [style]="{ width: '400px' }">
+            
+            <ng-template pTemplate="subHeader">
+                <form [formGroup]="form" class="formContainer">
+                    <div>
+                        <input [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('email')}" pInputText id="email" formControlName="email" required placeholder="Email">
+                        <input [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('password')}" pInputText id="password" formControlName="password" required placeholder="Contraseña">
+                            
+                    </div>
+                </form>
+
+                <p-button label="Ingresar" icon="pi pi-arrow-circle-right"></p-button>
+                
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <p-divider type="dashed"></p-divider>
+                <p-button label="Ingresar directo" (click)="loginDirecto()" icon="pi pi-angle-double-right"></p-button>
+
+                <p-progressBar *ngIf="isLoading$ | async as isLoggedIn" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+            </ng-template>
+        </p-card>
+
+    </div>
+<!--     
     <mat-card>
         <mat-card-content>
             <form [formGroup]="form">
@@ -50,7 +75,7 @@
 
 
         <mat-divider></mat-divider>
-    </mat-card>
+    </mat-card> -->
 
 
 
