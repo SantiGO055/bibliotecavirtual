@@ -5,6 +5,8 @@ import { Libro, Libros } from 'src/app/model/libro';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import Swal from 'sweetalert2';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { MenuItem } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-book',
@@ -31,24 +33,48 @@ export class AddBookComponent {
       this.downloadFile(url)
     }
   }
+  subscriberGetCategorias!: Subscription;
   categorias!: String[];
 
+  items!: MenuItem[];
+
   ngOnInit(): void {
+    
+    this.items = [
+      {
+      label: 'Datos del libro',
+      routerLink: 'add-detalle'
+      },
+      {
+          label: 'Categoria',
+          routerLink: 'add-categoria'
+      },
+      {
+          label: 'Adjunta el libro',
+          routerLink: 'add-adjuntar'
+      }
+    ];
+    
     this.uploaded = false;
-    this.form = this.fb.group({     // {5}
-      titulo: ['', Validators.required],
-      autor: ['', Validators.required],
-      editorial: ['', Validators.required],
-      categoria: ['',Validators.required],
-      file: ['', Validators.required],
-      altaCategoria: ['']
-    });
-    this.db.getCategorias().subscribe(cat=> {
+    // this.form = this.fb.group({     // {5}
+    //   titulo: ['', Validators.required],
+    //   autor: ['', Validators.required],
+    //   editorial: ['', Validators.required],
+    //   categoria: ['',Validators.required],
+    //   file: ['', Validators.required],
+    //   altaCategoria: ['']
+    // });
+    this.subscriberGetCategorias = this.db.getCategorias().subscribe(cat=> {
       cat.push("Agregar categoria");
       this.categorias = cat;
     })
   }
 
+  ngOnDestroy() {
+    if (this.subscriberGetCategorias) {
+      this.subscriberGetCategorias.unsubscribe();
+    }
+}
   // Titulo, autor, editorial
 
   async downloadFile(fileName: string) {

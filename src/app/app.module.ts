@@ -38,6 +38,14 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { ProgressBarModule } from 'primeng/progressbar';
+import {StepsModule} from 'primeng/steps';
+import {MenuItem} from 'primeng/api';
+import { AddDetalleComponent } from './components/add-book/add-detalle/add-detalle.component';
+import { AddCategoriaComponent } from './components/add-book/add-categoria/add-categoria.component';
+import { AddAdjuntarComponent } from './components/add-book/add-adjuntar/add-adjuntar.component';
+
+import { FormsModule } from '@angular/forms'; // <== add the imports!
+ 
 
 @NgModule({
   declarations: [
@@ -48,7 +56,10 @@ import { ProgressBarModule } from 'primeng/progressbar';
     NavbarComponent,
     AddBookComponent,
     SignInComponent,
-    DetalleLibroComponent
+    DetalleLibroComponent,
+    AddDetalleComponent,
+    AddCategoriaComponent,
+    AddAdjuntarComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +91,9 @@ import { ProgressBarModule } from 'primeng/progressbar';
     InputTextModule,
     CardModule,
     DividerModule,
-    ProgressBarModule
+    ProgressBarModule,
+    StepsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
