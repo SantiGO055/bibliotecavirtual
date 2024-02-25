@@ -45,6 +45,8 @@ import { AddCategoriaComponent } from './components/add-book/add-categoria/add-c
 import { AddAdjuntarComponent } from './components/add-book/add-adjuntar/add-adjuntar.component';
 
 import { FormsModule } from '@angular/forms'; // <== add the imports!
+import { DropdownModule } from 'primeng/dropdown';
+
  
 
 @NgModule({
@@ -93,7 +95,8 @@ import { FormsModule } from '@angular/forms'; // <== add the imports!
     DividerModule,
     ProgressBarModule,
     StepsModule,
-    FormsModule
+    FormsModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -33,7 +33,7 @@ export class AddBookComponent {
       this.downloadFile(url)
     }
   }
-  subscriberGetCategorias!: Subscription;
+
   categorias!: String[];
 
   items!: MenuItem[];
@@ -64,17 +64,10 @@ export class AddBookComponent {
     //   file: ['', Validators.required],
     //   altaCategoria: ['']
     // });
-    this.subscriberGetCategorias = this.db.getCategorias().subscribe(cat=> {
-      cat.push("Agregar categoria");
-      this.categorias = cat;
-    })
+    
   }
 
-  ngOnDestroy() {
-    if (this.subscriberGetCategorias) {
-      this.subscriberGetCategorias.unsubscribe();
-    }
-}
+  
   // Titulo, autor, editorial
 
   async downloadFile(fileName: string) {

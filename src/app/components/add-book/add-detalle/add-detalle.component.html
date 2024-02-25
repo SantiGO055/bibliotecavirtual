@@ -1,34 +1,42 @@
-<p-card>
-    <ng-template pTemplate="title">
-        Personal Information
-    </ng-template>
-    <ng-template pTemplate="subtitle">
-        Enter your personal information
-    </ng-template>
-    <ng-template pTemplate="content">
-        <form [formGroup]="form">
-            <div class="p-fluid" class="field">
-                    <label for="titulo">Titulo</label>
-                    <input formControlName="titulo" id="titulo" type="text" required pInputText [ngClass]="{'ng-dirty': isFieldInvalid('titulo')}"> 
-                    <small *ngIf="isFieldInvalid('titulo')" class="p-error">Ingrese titulo.</small>
-                </div>
-                <div class="field">
-                    <label for="autor">Autor</label>
-                    <input formControlName="autor" id="autor" type="text" required pInputText  [ngClass]="{'ng-dirty':isFieldInvalid('autor')}"> 
-                    <small class="p-error" *ngIf="isFieldInvalid('autor')">Ingrese autor.</small>
-                </div>
-                <div class="field">
-                    <label for="editorial">Editorial</label>
-                    <input formControlName="editorial" id="editorial" type="number" required pInputText [ngClass]="{'ng-dirty': isFieldInvalid('editorial')}"> 
-                    <small class="p-error" *ngIf="isFieldInvalid('editorial')">Ingrese editorial.</small>
-                </div>
+<div>
 
-        </form>
+
+    <p-card class="card-item">
         
-    </ng-template>
-    <ng-template pTemplate="footer">
-        <div class="grid grid-nogutter justify-content-end">
-            <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
-        </div>
-    </ng-template>
-</p-card>
+
+        
+            <ng-template pTemplate="title">
+                Personal Information
+            </ng-template>
+            <ng-template pTemplate="subtitle">
+                Enter your personal information
+            </ng-template>
+            <ng-template pTemplate="content" class="content">
+                <form class="form" [formGroup]="form">
+                    <div class="p-fluid" class="field">
+                            <label for="titulo">Titulo</label>
+                            <input formControlName="titulo" id="titulo" type="text" required pInputText [ngClass]="{'ng-dirty': isFieldInvalid('titulo')}"> 
+                            <small *ngIf="isFieldInvalid('titulo')" class="p-error">Ingrese titulo.</small>
+                        </div>
+                        <div class="field">
+                            <label for="autor">Autor</label>
+                            <input formControlName="autor" id="autor" type="text" required pInputText  [ngClass]="{'ng-dirty':isFieldInvalid('autor')}"> 
+                            <small class="p-error" *ngIf="isFieldInvalid('autor')">Ingrese autor.</small>
+                        </div>
+                        <div class="field">
+                            <label for="editorial">Editorial</label>
+                            <input formControlName="editorial" id="editorial" type="number" required pInputText [ngClass]="{'ng-dirty': isFieldInvalid('editorial')}"> 
+                            <small class="p-error" *ngIf="isFieldInvalid('editorial')">Ingrese editorial.</small>
+                        </div>
+
+                </form>
+                
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <div class="grid grid-nogutter justify-content-end">
+                    <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+                </div>
+            </ng-template>
+            
+    </p-card>
+</div>

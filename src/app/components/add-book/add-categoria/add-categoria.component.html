@@ -1,27 +1,18 @@
-<p-card>
+<p-card class="card-item">
     <ng-template pTemplate="title">
-        Personal Information
+        Categorias
     </ng-template>
     <ng-template pTemplate="subtitle">
-        Enter your personal information
+        Seleccione una categoria
     </ng-template>
     <ng-template pTemplate="content">
         <form [formGroup]="form">
-            <div class="p-fluid" class="field">
-                    <label for="titulo">Titulo</label>
-                    <input formControlName="titulo" id="titulo" type="text" required pInputText [ngClass]="{'ng-dirty': this.dataService.isFieldInvalid('titulo')}"> 
-                    <small *ngIf="this.dataService.isFieldInvalid('titulo')" class="p-error">Ingrese titulo.</small>
+            <div *ngIf="categorias" class="p-fluid" class="field">
+                
+                    <p-dropdown formControlName="categoria" [options]="categorias" placeholder="Seleccione categoria"></p-dropdown>
+                    <small *ngIf="this.dataService.isFieldInvalid('categoria')" class="p-error">Debe seleccionar una categoria.</small>
                 </div>
-                <div class="field">
-                    <label for="autor">Autor</label>
-                    <input formControlName="autor" id="autor" type="text" required pInputText  [ngClass]="{'ng-dirty':this.dataService.isFieldInvalid('autor')}"> 
-                    <small class="p-error" *ngIf="this.dataService.isFieldInvalid('autor')">Ingrese autor.</small>
-                </div>
-                <div class="field">
-                    <label for="editorial">Editorial</label>
-                    <input formControlName="editorial" id="editorial" type="number" required pInputText [ngClass]="{'ng-dirty': this.dataService.isFieldInvalid('editorial')}"> 
-                    <small class="p-error" *ngIf="this.dataService.isFieldInvalid('editorial')">Ingrese editorial.</small>
-                </div>
+                
 
         </form>
         
