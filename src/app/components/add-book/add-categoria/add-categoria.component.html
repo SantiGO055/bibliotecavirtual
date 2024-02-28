@@ -6,12 +6,17 @@
         Seleccione una categoria
     </ng-template>
     <ng-template pTemplate="content">
-        <form [formGroup]="form">
+        <form [formGroup]="this.dataService.form">
             <div *ngIf="categorias" class="p-fluid" class="field">
                 
-                    <p-dropdown formControlName="categoria" [options]="categorias" placeholder="Seleccione categoria"></p-dropdown>
+                    <p-dropdown (onChange)="changeDropdown()" formControlName="categoria" [options]="categorias" placeholder="Seleccione categoria"></p-dropdown>
                     <small *ngIf="this.dataService.isFieldInvalid('categoria')" class="p-error">Debe seleccionar una categoria.</small>
-                </div>
+            </div>
+            <div class="check">
+                <label for="ny">Nueva categoria: </label>
+                <p-checkbox (onChange)="changeCategoria(nuevaCategoria)" value="" formControlName="altaCategoria" inputId="ny"></p-checkbox>
+                <input *ngIf="nuevaCategoria" formControlName="altaCategoria" id="categoria" type="text" required pInputText> 
+            </div>
                 
 
         </form>
@@ -19,6 +24,7 @@
     </ng-template>
     <ng-template pTemplate="footer">
         <div class="grid grid-nogutter justify-content-end">
+            <p-button label="Atras" (onClick)="previousPage()" icon="pi pi-angle-left" iconPos="left"></p-button>
             <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
         </div>
     </ng-template>

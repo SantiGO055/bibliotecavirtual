@@ -46,7 +46,7 @@ import { AddAdjuntarComponent } from './components/add-book/add-adjuntar/add-adj
 
 import { FormsModule } from '@angular/forms'; // <== add the imports!
 import { DropdownModule } from 'primeng/dropdown';
-
+import { CheckboxModule } from 'primeng/checkbox';
  
 
 @NgModule({
@@ -96,7 +96,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ProgressBarModule,
     StepsModule,
     FormsModule,
-    DropdownModule
+    DropdownModule,
+    CheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

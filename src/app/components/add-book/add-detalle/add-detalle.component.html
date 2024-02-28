@@ -6,13 +6,13 @@
 
         
             <ng-template pTemplate="title">
-                Personal Information
+                Alta de libro
             </ng-template>
             <ng-template pTemplate="subtitle">
-                Enter your personal information
+                Ingrese los datos del libro
             </ng-template>
             <ng-template pTemplate="content" class="content">
-                <form class="form" [formGroup]="form">
+                <form class="form" [formGroup]="this.dataService.form">
                     <div class="p-fluid" class="field">
                             <label for="titulo">Titulo</label>
                             <input formControlName="titulo" id="titulo" type="text" required pInputText [ngClass]="{'ng-dirty': isFieldInvalid('titulo')}"> 
@@ -34,7 +34,8 @@
             </ng-template>
             <ng-template pTemplate="footer">
                 <div class="grid grid-nogutter justify-content-end">
-                    <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+                    
+                    <p-button label="Siguiente" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
                 </div>
             </ng-template>
             

@@ -16,7 +16,8 @@ export class DataService {
       editorial: ['', Validators.required],
       categoria: ['',Validators.required],
       file: ['', Validators.required],
-      altaCategoria: ['']
+      altaCategoria: [''],
+      categoriaCheck: ['']
     });
   }
 
@@ -24,7 +25,7 @@ export class DataService {
 
     return (
       (!this.form.get(field)?.valid && this.form.get(field)?.touched) ||
-      (this.form.get(field)?.untouched)
+      (this.form.get(field)?.untouched) || (this.form.get(field)?.value == 'Seleccione categoria')
     );
   }
 

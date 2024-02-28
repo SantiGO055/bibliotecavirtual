@@ -18,7 +18,7 @@ export class AddDetalleComponent {
   form!: FormGroup;
   
 
-  constructor(private router: Router, private dataService: DataService){
+  constructor(private router: Router, public dataService: DataService){
     
   }
   ngOnInit(): void{
@@ -47,5 +47,6 @@ export class AddDetalleComponent {
 
     this.submitted = true;
 }
+
 
 }
