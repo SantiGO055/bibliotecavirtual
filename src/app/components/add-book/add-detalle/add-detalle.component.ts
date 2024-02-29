@@ -15,30 +15,27 @@ export class AddDetalleComponent {
 
   submitted: boolean = false;
   private formSubmitAttempt?: boolean; // {2}
-  form!: FormGroup;
   
 
   constructor(private router: Router, public dataService: DataService){
     
   }
-  ngOnInit(): void{
-    this.form = this.dataService.form;
-  }
+  
   isFieldInvalid(field: string) { // {6}
 
     return (
-      (!this.form.get(field)?.valid && this.form.get(field)?.touched) ||
-      (this.form.get(field)?.untouched && this.formSubmitAttempt)
+      (!this.dataService.form.get(field)?.valid && this.dataService.form.get(field)?.touched) ||
+      (this.dataService.form.get(field)?.untouched && this.formSubmitAttempt)
     );
   }
 
   nextPage() {
 
     
-    if (this.form.get('titulo')?.value && this.form.get('autor')?.value && this.form.get('editorial')?.value) {
-      this.dataService.form.get('titulo')?.setValue(this.form.get("titulo")?.value)
-      this.dataService.form.get('autor')?.setValue(this.form.get("autor")?.value)
-      this.dataService.form.get('editorial')?.setValue(this.form.get("editorial")?.value)
+    if (this.dataService.form.get('titulo')?.value && this.dataService.form.get('autor')?.value && this.dataService.form.get('editorial')?.value) {
+      // this.dataService.form.get('titulo')?.setValue(this.form.get("titulo")?.value)
+      // this.dataService.form.get('autor')?.setValue(this.form.get("autor")?.value)
+      // this.dataService.form.get('editorial')?.setValue(this.form.get("editorial")?.value)
       
         this.router.navigate(['/addbook/add-categoria']);
 

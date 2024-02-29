@@ -1,1 +1,18 @@
-<p>add-adjuntar works!</p>
+<p-card class="card-item">
+    
+
+        <ng-template pTemplate="content">
+            <div class="subida">
+                <app-upload-image (newItemEvent)="this.dataService.prepararSubida($event)" [uploaded]="false"
+                (formEvent)="this.dataService.reciboFormFile($event)" required></app-upload-image>
+
+            </div>
+        
+        </ng-template>
+    
+
+    <ng-template pTemplate="footer">
+            <p-button label="Atras" (onClick)="previousPage()" icon="pi pi-angle-left" iconPos="left"></p-button>
+            <p-button label="Subir libro" (onClick)="nextPage()" icon="pi pi-angle-up" iconPos="right"></p-button>
+    </ng-template>
+</p-card>

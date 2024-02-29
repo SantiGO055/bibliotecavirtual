@@ -25,7 +25,7 @@
                         </div>
                         <div class="field">
                             <label for="editorial">Editorial</label>
-                            <input formControlName="editorial" id="editorial" type="number" required pInputText [ngClass]="{'ng-dirty': isFieldInvalid('editorial')}"> 
+                            <input formControlName="editorial" id="editorial" type="text" required pInputText [ngClass]="{'ng-dirty': isFieldInvalid('editorial')}"> 
                             <small class="p-error" *ngIf="isFieldInvalid('editorial')">Ingrese editorial.</small>
                         </div>
 

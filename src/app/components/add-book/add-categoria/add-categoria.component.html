@@ -14,7 +14,7 @@
             </div>
             <div class="check">
                 <label for="ny">Nueva categoria: </label>
-                <p-checkbox (onChange)="changeCategoria(nuevaCategoria)" value="" formControlName="altaCategoria" inputId="ny"></p-checkbox>
+                <p-checkbox (onChange)="changeCategoria(nuevaCategoria)" value="" formControlName="checkCategoria" inputId="ny"></p-checkbox>
                 <input *ngIf="nuevaCategoria" formControlName="altaCategoria" id="categoria" type="text" required pInputText> 
             </div>
                 

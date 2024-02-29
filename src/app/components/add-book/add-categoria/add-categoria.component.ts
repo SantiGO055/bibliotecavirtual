@@ -37,31 +37,18 @@ export class AddCategoriaComponent {
       this.subscriberGetCategorias.unsubscribe();
       }
     this.nuevaCategoria = false;
-    this.form.get('categoriaCheck')?.setValue('')
+    this.form.get('checkCategoria')?.setValue('')
     
   }
 
   nextPage(){
-    if(this.nuevaCategoria){
-      this.form.get('categoria')?.setValue(this.form.get('altaCategoria')?.value)
-      
-      console.log(this.form.get('categoria')?.value)
-    }
-    else{
-      console.log(this.form.get('categoria')?.value)
-    }
-    this.dataService.form.get('categoria')?.setValue(this.form.get('categoria')?.value)
-
-    console.log(this.dataService.form.status)
-    // if (this.form.get('categoria')?.value && this.form.get('autor')?.value && this.form.get('editorial')?.value) {
-    //   this.dataService.form.get('titulo')?.setValue(this.form.get("titulo")?.value)
-    //   this.dataService.form.get('autor')?.setValue(this.form.get("autor")?.value)
-    //   this.dataService.form.get('editorial')?.setValue(this.form.get("editorial")?.value)
-    // }
-    this.router.navigate(['/addbook/add-adjuntar']);
+    if(this.dataService.form.get('categoria')?.value || this.dataService.form.get('altaCategoria')?.value){
+      console.log(this.dataService.form.get('altaCategoria')?.value)
+      console.log(this.dataService.form.get('categoria')?.value)
+      this.router.navigate(['/addbook/add-adjuntar']);
 
       return;
-
+    }
   }
   previousPage(){
     this.router.navigate(['/addbook/add-detalle']);
