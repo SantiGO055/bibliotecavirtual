@@ -42,7 +42,7 @@ export class AddCategoriaComponent {
   }
 
   nextPage(){
-    if(this.dataService.form.get('categoria')?.value || this.dataService.form.get('altaCategoria')?.value){
+    if((this.dataService.form.get('categoria')?.value || this.dataService.form.get('altaCategoria')?.value) && this.dataService.form.get('categoria')?.value != 'Seleccione categoria'){
       console.log(this.dataService.form.get('altaCategoria')?.value)
       console.log(this.dataService.form.get('categoria')?.value)
       this.router.navigate(['/addbook/add-adjuntar']);

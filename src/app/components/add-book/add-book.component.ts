@@ -122,95 +122,9 @@ export class AddBookComponent {
     this.formSubmitAttempt = true;             // {8}
   }
 
-  prepararSubida(files: any) {
+  
 
-
-    try {
-      // console.log(files)
-
-      if (!files || files.length === 0) {
-        throw new Error('Debe seleccionar un archivo PDF para subir.')
-      }
-
-
-
-      const file = files[0]
-      const fileName = files[0].name
-      const fileExt = file.name.split('.').pop()
-      const filePath = `${Math.random()}.${fileExt}`
-
-      this.fileName = fileName;
-      this.file = file;
-
-      if (fileExt != "pdf") {
-        this.fileName = "";
-        this.file = undefined;
-        Swal.fire("Error", "El archivo debe ser con formato PDF", "error")
-      }
-
-    } catch (error) {
-      if (error instanceof Error) {
-        Swal.fire("que", error.message, "warning")
-      }
-    } finally {
-
-
-
-    }
-  }
-
-  async cargarLibro() {
-
-    try {
-
-      let titulo = this.form.get("titulo")?.value
-      let autor = this.form.get("autor")?.value
-      let editorial = this.form.get("editorial")?.value
-      let categoria = this.form.get("categoria")?.value
-
-
-
-      if (this.form?.valid) {
-        
-
-
-        // this.storage.uploadToAWS(this.fileName, this.file).then((a) => {
-        //   console.log(a)
-        // }).finally(() => {
-        //   let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName }
-        //   this.db.altaLibro(libro)
-        // });
-
-        this.spinner.showSpinner();
-        if(this.fileName){
-          if(this.file){
-            this.storage.tareaCloudStorage(this.fileName, this.file).then((url) => {
-              this.url = this.storage.url;
-            }).catch((e) => console.log(e))
-            .finally(() => {
-              let libro: Libro = { titulo, autor, editorial, urlArchivo: this.url, nombreArchivo: this.fileName, categoria}
-              let libroAlta: Libros = {categoria, libro}
-              console.log(libroAlta)
-              this.db.altaLibro(libroAlta)
-              
-            });
-          }
-
-        }
-
-      }
-      else {
-
-      }
-      this.formSubmitAttempt = true;
-
-
-
-    } catch (error) {
-
-    }
-
-  }
+ 
   reciboFormFile(event: any) {
     // console.log(event)
     this.form.controls['file'].setValue(event)

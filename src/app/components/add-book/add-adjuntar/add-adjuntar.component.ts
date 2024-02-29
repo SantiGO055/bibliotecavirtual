@@ -19,10 +19,11 @@ export class AddAdjuntarComponent {
       return;
   }
 
-  nextPage(){
+  subirLibro(){
     if(this.dataService.form.get('categoria')?.value || this.dataService.form.get('altaCategoria')?.value){
       console.log(this.dataService.form.get('altaCategoria')?.value)
       console.log(this.dataService.form.get('categoria')?.value)
+      this.dataService.cargarLibro()
 
       return;
     }
