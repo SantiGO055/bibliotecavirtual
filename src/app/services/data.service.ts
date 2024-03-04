@@ -16,7 +16,7 @@ export class DataService {
   url: string = ''
   fileName!: string;
   file!: any;
-
+  nuevaCategoria: boolean = false;
 
   libro!: Libro;
   public form!: FormGroup
@@ -28,7 +28,7 @@ export class DataService {
       categoria: ['',Validators.required],
       file: ['', Validators.required],
       altaCategoria: [''],
-      checkCategoria: ['']
+      checkCategoria: [false ]
     });
   }
 
