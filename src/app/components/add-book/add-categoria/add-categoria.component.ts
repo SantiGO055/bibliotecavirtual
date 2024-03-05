@@ -11,9 +11,8 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   styleUrls: ['./add-categoria.component.scss']
 })
 export class AddCategoriaComponent {
-  form!: FormGroup;
   subscriberGetCategorias!: Subscription;
-  nuevaCategoria: boolean = false;
+  
   categorias!: String[];
   
   
@@ -21,10 +20,6 @@ export class AddCategoriaComponent {
     
   }
   ngOnInit(): void{
-    this.nuevaCategoria = false;
-    this.form = this.dataService.form;
-    this.form.get('altaCategoria')?.setValue('')
-    console.log(this.form)
 
     this.subscriberGetCategorias = this.db.getCategorias().subscribe(cat=> {
       cat.unshift("Seleccione categoria");
@@ -36,8 +31,6 @@ export class AddCategoriaComponent {
     if (this.subscriberGetCategorias) {
       this.subscriberGetCategorias.unsubscribe();
       }
-    this.nuevaCategoria = false;
-    this.form.get('checkCategoria')?.setValue('')
     
   }
 
@@ -60,16 +53,22 @@ export class AddCategoriaComponent {
       return;
   }
 
-  changeCategoria(e: any){
+  changeCategoriaCheckbox(e: any){
     console.log(e)
-    if(this.nuevaCategoria){
-      this.form.get('categoria')?.setValue('')
+    this.dataService.form.get('categoria')?.setValue('')
+    if(!e[0]){
+      this.dataService.form.get('altaCategoria')?.setValue('')
+      
     }
-    this.nuevaCategoria = !this.nuevaCategoria
+    
+    
   }
   changeDropdown(){
-    if(this.form.get('categoria')?.value == 'Seleccione categoria')
-      console.log(this.nuevaCategoria)
+    if(this.dataService.form.get('categoria')?.value == 'Seleccione categoria')
+    {
+      
+    }
+    
     
 
   }

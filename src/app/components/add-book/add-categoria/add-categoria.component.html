@@ -14,8 +14,8 @@
             </div>
             <div class="check">
                 <label for="ny">Nueva categoria: </label>
-                <p-checkbox (onChange)="changeCategoria(nuevaCategoria)" value="" formControlName="checkCategoria" inputId="ny"></p-checkbox>
-                <input *ngIf="nuevaCategoria" formControlName="altaCategoria" id="categoria" type="text" required pInputText> 
+                <p-checkbox (onChange)="changeCategoriaCheckbox(this.dataService.form.get('checkCategoria')?.value)" value=true formControlName="checkCategoria" inputId="ny"></p-checkbox>
+                <input *ngIf="this.dataService.form.get('checkCategoria')?.value[0]" formControlName="altaCategoria" id="categoria" type="text" required pInputText> 
             </div>
                 
 
