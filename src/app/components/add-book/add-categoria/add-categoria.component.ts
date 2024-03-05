@@ -42,6 +42,10 @@ export class AddCategoriaComponent {
   }
 
   nextPage(){
+    let str: string = 'hello';
+    if(this.dataService.form.get('altaCategoria')?.value)
+      this.dataService.form.get('altaCategoria')?.setValue(this.dataService.form.get('altaCategoria')?.value[0].toUpperCase() + this.dataService.form.get('altaCategoria')?.value.slice(1));
+    
     if((this.dataService.form.get('categoria')?.value || this.dataService.form.get('altaCategoria')?.value) && this.dataService.form.get('categoria')?.value != 'Seleccione categoria'){
       console.log(this.dataService.form.get('altaCategoria')?.value)
       console.log(this.dataService.form.get('categoria')?.value)
