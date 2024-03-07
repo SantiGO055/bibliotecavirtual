@@ -1,16 +1,16 @@
-<p-menubar>
+<p-menubar [model]="items" *ngIf="isLoggedIn$ | async as isLoggedIn">
     <ng-template pTemplate="start">
-        <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" />
+        <img src="../../../assets/logo.png" height="40" class="mr-2"/>
     </ng-template>
     <ng-template pTemplate="end">
-        <input type="text" pInputText placeholder="Search" class="w-full" />
+        <button type="button" (click)="onLogout()" pButton label="Salir" *ngIf="isLoggedIn" icon="pi pi-power-off" ></button>
     </ng-template>
 </p-menubar>
-<mat-toolbar *ngIf="isLoggedIn$ | async as isLoggedIn" color="primary">
+<!-- <mat-toolbar *ngIf="isLoggedIn$ | async as isLoggedIn" color="primary">
     <img class="logo" src="../../../assets/logo.png"/>
     <span>Biblioteca E. E. N° 2 "Manuel Pardal" - Saladillo</span>
     <div class="spacer"></div>
     <a mat-button routerLink="/">Inicio</a>
     <button *ngIf="!(isAnonymous$ | async) as isAnonymous" mat-button routerLink="/addbook">Agregar libro</button>
     <button mat-button (click)="onLogout()" *ngIf="isLoggedIn">Salir</button>
-</mat-toolbar>
+</mat-toolbar> -->
