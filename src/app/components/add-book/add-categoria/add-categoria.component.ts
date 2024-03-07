@@ -64,9 +64,10 @@ export class AddCategoriaComponent {
     
   }
   changeDropdown(){
-    if(this.dataService.form.get('categoria')?.value == 'Seleccione categoria')
+    if(this.dataService.form.get('categoria')?.value != 'Seleccione categoria')
     {
-      
+      this.dataService.form.get('checkCategoria')?.setValue('')
+      this.dataService.form.get('altaCategoria')?.setValue('')
     }
     
     

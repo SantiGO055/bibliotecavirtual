@@ -48,6 +48,8 @@ import { FormsModule } from '@angular/forms'; // <== add the imports!
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 
+import { MenubarModule } from 'primeng/menubar';
+
  
 
 @NgModule({
@@ -98,7 +100,9 @@ import { CheckboxModule } from 'primeng/checkbox';
     StepsModule,
     FormsModule,
     DropdownModule,
-    CheckboxModule
+    CheckboxModule,
+    MenubarModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
